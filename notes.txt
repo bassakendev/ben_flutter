@@ -1,0 +1,464 @@
+////////////////////////////////////// Formulaire/////////////////
+import 'package:flutter/material.dart';
+
+class TaskForm extends StatefulWidget {
+  @override
+  _TaskFormState createState() => _TaskFormState();
+}
+
+class _TaskFormState extends State<TaskForm> {
+  final _formKey = GlobalKey<FormState>();
+  String _taskTitle = '';
+  String _taskDescription = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Task Form'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Task Title',
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter a task title';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _taskTitle = value;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Task Description',
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter a task description';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _taskDescription = value;
+                },
+              ),
+              SizedBox(height: 16.0),
+              RaisedButton(
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    // Ajoutez ici la logique pour enregistrer la tâche
+                    // avec les valeurs _taskTitle et _taskDescription
+                  }
+                },
+                child: Text('Save Task'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+//////////////////////////////////Scroll/////////////////////
+dart
+import 'package:flutter/material.dart';
+
+class ScrollableContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Scrollable Container'),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          height: 1000, // Hauteur du contenu
+          child: Column(
+            children: [
+              // Vos widgets à l'intérieur du conteneur scrollable
+              // ...
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+////////////////////////////Validations////////////////////
+
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+FormBuilderTextField(
+  name: 'myField',
+  validator: (value) {
+    if (value.isEmpty) {
+      return 'Ce champ est requis';
+    }
+
+    // Vérifiez si la valeur correspond à l'expression régulière
+    RegExp regex = RegExp(r'^(?=.*[0-9]{3})(?=.*[a-zA-Z]{3})[0-9a-zA-Z]{8}$');
+    if (!regex.hasMatch(value)) {
+      return 'Le champ doit contenir exactement 8 caractères avec au moins 3 chiffres et 3 lettres';
+    }
+
+    return null;
+  },
+),
+
+//////////////////////////////Variables State////////////////////
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+dart
+class _MyWidgetState extends State<MyWidget> {
+  // Déclarez votre variable avec état ici
+  String myVariable = 'Initial value';
+
+  @override
+  Widget build(BuildContext context) {
+    // Utilisez la variable avec état dans votre widget
+    return Text(myVariable);
+  }
+}
+
+
+void updateVariable() {
+  // Modifier le contenu de la variable avec état ici
+  setState(() {
+    myVariable = 'Nouvelle valeur';
+  });
+}
+
+dart
+RaisedButton(
+  onPressed: () {
+    updateVariable();
+  },
+  child: Text('Modifier la variable'),
+),
+
+//////////////////////////Tableau d'objet////////////////////////////
+
+class Person {
+  String nom;
+  String prenom;
+  int age;
+
+  Person({this.nom, this.prenom, this.age});
+}
+
+
+List<Person> personnes = [
+  Person(nom: 'Doe', prenom: 'John', age: 25),
+  Person(nom: 'Smith', prenom: 'Jane', age: 30),
+  Person(nom: 'Johnson', prenom: 'Bob', age: 40),
+];
+
+
+ListView.builder(
+  itemCount: personnes.length,
+  itemBuilder: (BuildContext context, int index) {
+    Person personne = personnes[index];
+    return ListTile(
+      title: Text(personne.nom),
+      subtitle: Text('${personne.prenom}, ${personne.age} ans'),
+    );
+  },
+)
+
+
+///////////////////////Couleur de Formulaire////////////////
+
+Color couleurFocus = Colors.blue;
+Color couleurSansFocus = Colors.grey;
+
+
+FocusNode focusNode = FocusNode();
+
+TextField(
+  focusNode: focusNode,
+  decoration: InputDecoration(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: couleurFocus),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: couleurSansFocus),
+    ),
+  ),
+)
+
+
+focusNode.addListener(() {
+  setState(() {
+    // Mettez à jour les couleurs en fonction de l'état de focus
+    if (focusNode.hasFocus) {
+      couleurFocus = Colors.green;
+      couleurSansFocus = Colors.grey;
+    } else {
+      couleurFocus = Colors.blue;
+      couleurSansFocus = Colors.grey;
+    }
+  });
+});
+
+////////////////////////Inclusion de chaine/////////////////
+
+String chaine = 'manger';
+String sousChaine = 'ang';
+
+bool contientSousChaine = chaine.contains(sousChaine);
+
+if (contientSousChaine) {
+  print('La chaîne inclut la sous-chaîne');
+} else {
+  print('La chaîne ne contient pas la sous-chaîne');
+}
+
+/////////////////////////////Trie de Tableau////////////////
+dart
+class Person {
+  String nom;
+  int age;
+
+  Person({this.nom, this.age});
+}
+
+List<Person> personnes = [
+  Person(nom: 'Doe', age: 25),
+  Person(nom: 'Smith', age: 30),
+  Person(nom: 'Johnson', age: 40),
+];
+
+personnes.sort((a, b) => a.age.compareTo(b.age));
+
+///////////////Form cas du password et de l'email/////////
+
+Pour récupérer les mots de passe et les adresses e-mail saisis par l'utilisateur dans une application Flutter, vous pouvez utiliser le widget TextField avec des validateurs appropriés. Voici comment vous pouvez le faire :
+
+Pour récupérer un mot de passe :
+Code
+Copy code
+1dart
+2TextField(
+3  obscureText: true, // Masque le texte saisi pour les mots de passe
+4  onChanged: (value) {
+5    // Récupère la valeur du mot de passe à chaque modification
+6    String password = value;
+7    // Faites quelque chose avec le mot de passe récupéré
+8  },
+9)
+Pour récupérer une adresse e-mail :
+Code
+Copy code
+1dart
+2TextField(
+3  keyboardType: TextInputType.emailAddress, // Définit le clavier pour les adresses e-mail
+4  onChanged: (value) {
+5    // Récupère la valeur de l'adresse e-mail à chaque modification
+6    String email = value;
+7    // Faites quelque chose avec l'adresse e-mail récupérée
+8  },
+9)
+
+Lorsque l'utilisateur saisit du texte dans le TextField, la fonction onChanged est appelée avec la valeur actuelle du texte. Vous pouvez récupérer cette valeur et la stocker dans une variable pour une utilisation ultérieure.
+
+Assurez-vous également de valider les saisies de l'utilisateur pour vous assurer que les mots de passe et les adresses e-mail sont corrects. Vous pouvez utiliser des validateurs intégrés tels que EmailValidator pour valider les adresses e-mail et MinLengthValidator pour valider la longueur minimale du mot de passe. Par exemple :
+
+Code
+Copy code
+1dart
+2TextField(
+3  keyboardType: TextInputType.emailAddress,
+4  onChanged: (value) {
+5    String email = value;
+6    if (EmailValidator.validate(email)) {
+7      // L'adresse e-mail est valide
+8    } else {
+9      // L'adresse e-mail est invalide
+10    }
+11  },
+12)
+
+Cela vous permettra de récupérer et de valider les mots de passe et les adresses e-mail saisis par l'utilisateur dans votre application Flutter.
+
+///////////////////////////Transmission de variables //////////////////////////
+
+dart
+   class ParentWidget extends StatelessWidget {
+     final String data;
+
+     ParentWidget(this.data);
+
+     @override
+     Widget build(BuildContext context) {
+       return ChildWidget(data);
+     }
+   }
+
+   class ChildWidget extends StatelessWidget {
+     final String data;
+
+     ChildWidget(this.data);
+
+     @override
+     Widget build(BuildContext context) {
+       return Text(data);
+     }
+   }
+   
+   ///////////////////////////Transmission de variables methode 2 //////////////////////////
+
+   Bien sûr, permettez-moi d'expliquer plus en détail la deuxième méthode utilisant InheritedWidget.
+
+InheritedWidget est un widget spécial dans Flutter qui permet de partager des données avec tous les widgets descendants. Voici comment vous pouvez l'utiliser pour partager des variables entre des widgets :
+
+Créez une classe héritant de InheritedWidget pour stocker et fournir les variables partagées :
+Code
+Copy code
+1dart
+2class SharedDataWidget extends InheritedWidget {
+3  final String data;
+4
+5  SharedDataWidget({required this.data, required Widget child})
+6      : super(child: child);
+7
+8  @override
+9  bool updateShouldNotify(SharedDataWidget oldWidget) {
+10    return oldWidget.data != data;
+11  }
+12
+13  static SharedDataWidget? of(BuildContext context) {
+14    return context.dependOnInheritedWidgetOfExactType<SharedDataWidget>();
+15  }
+16}
+Dans cet exemple, nous avons créé une classe SharedDataWidget qui étend InheritedWidget.
+La classe a un attribut data qui représente la variable partagée.
+Le constructeur SharedDataWidget prend la variable data et un widget enfant.
+La méthode updateShouldNotify est utilisée pour déterminer si les widgets descendants doivent être reconstruits lorsque la variable partagée change.
+La méthode statique of est utilisée pour accéder à l'instance de SharedDataWidget à partir d'un widget descendant.
+Enveloppez vos widgets avec SharedDataWidget pour leur donner accès à la variable partagée :
+Code
+Copy code
+1dart
+2class ParentWidget extends StatelessWidget {
+3  @override
+4  Widget build(BuildContext context) {
+5    return SharedDataWidget(
+6      data: 'Hello',
+7      child: ChildWidget(),
+8    );
+9  }
+10}
+11
+12class ChildWidget extends StatelessWidget {
+13  @override
+14  Widget build(BuildContext context) {
+15    final sharedData = SharedDataWidget.of(context)?.data ?? '';
+16    return Text(sharedData);
+17  }
+18}
+Dans cet exemple, ParentWidget est le widget parent qui crée une instance de SharedDataWidget et lui passe la variable data avec la valeur "Hello".
+ChildWidget est un widget descendant qui souhaite accéder à la variable partagée. Il peut le faire en appelant SharedDataWidget.of(context)?.data, ce qui renvoie la valeur de la variable partagée.
+Si la variable partagée change, ChildWidget sera reconstruit automatiquement grâce à InheritedWidget.
+
+Cela permet de partager la variable data entre ParentWidget et ChildWidget sans avoir à la passer explicitement via les constructeurs.
+
+J'espère que cela clarifie la méthode utilisant InheritedWidget pour partager des variables entre des widgets dans Flutter.
+
+/////////////////////////////Separation des composantes////////////////////
+
+Pour séparer vos classes dans différents fichiers tout en maintenant le bon fonctionnement de votre affichage dans Flutter, vous pouvez suivre les étapes suivantes :
+
+Créez un fichier séparé pour chaque classe que vous souhaitez extraire. Par exemple, si vous avez une classe MyWidget que vous souhaitez extraire dans un fichier séparé, créez un fichier my_widget.dart et déplacez-y la classe MyWidget.
+Code
+Copy code
+1dart
+2   // my_widget.dart
+3
+4   import 'package:flutter/material.dart';
+5
+6   class MyWidget extends StatelessWidget {
+7     // ...
+8   }
+9   
+Importez le fichier contenant la classe dans le fichier où vous utilisez cette classe. Par exemple, si vous utilisez la classe MyWidget dans le fichier main.dart, importez le fichier my_widget.dart dans main.dart.
+Code
+Copy code
+1dart
+2   // main.dart
+3
+4   import 'package:flutter/material.dart';
+5   import 'my_widget.dart';
+6
+7   void main() {
+8     runApp(MyApp());
+9   }
+10
+11   class MyApp extends StatelessWidget {
+12     @override
+13     Widget build(BuildContext context) {
+14       return MaterialApp(
+15         home: Scaffold(
+16           appBar: AppBar(
+17             title: Text('My App'),
+18           ),
+19           body: MyWidget(), // Utilisation de la classe MyWidget
+20         ),
+21       );
+22     }
+23   }
+24   
+
+Assurez-vous d'importer le fichier correctement en utilisant la syntaxe import 'chemin/vers/le/fichier.dart'.
+
+Vérifiez que toutes les dépendances nécessaires sont correctement importées dans le fichier contenant la classe. Par exemple, si votre classe utilise des widgets de flutter/material.dart, assurez-vous que le fichier contenant la classe importe package:flutter/material.dart.
+Code
+Copy code
+1dart
+2   // my_widget.dart
+3
+4   import 'package:flutter/material.dart';
+5
+6   class MyWidget extends StatelessWidget {
+7     // Utilisation des widgets de flutter/material.dart
+8     // ...
+9   }
+10   
+Vérifiez que tous les fichiers sont correctement enregistrés et que vous n'avez pas de fautes de frappe dans les noms de fichiers ou les noms de classes.
+
+Une fois que vous avez suivi ces étapes, votre code devrait fonctionner normalement et l'affichage devrait être inchangé. La séparation des classes dans des fichiers distincts est une bonne pratique de gestion du code, car elle permet une meilleure organisation et une plus grande facilité de maintenance.
+
+//////////////////////Ajout d'elements dans un tableau////////////
+
+dart
+List<int> myArray = [1, 2, 3]; // Déclaration d'un tableau de nombres entiers
+
+myArray.add(4); // Ajout de l'élément 4 à la fin du tableau
+
+print(myArray); // Affiche [1, 2, 3, 4]
+
+
+plusieurs elements
+
+dart
+List<int> myArray = [1, 2, 3];
+List<int> additionalElements = [4, 5, 6];
+
+myArray.addAll(additionalElements);
+
+print(myArray); // Affiche [1, 2, 3, 4, 5, 6]
