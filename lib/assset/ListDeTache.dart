@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, library_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 import 'ShowTache.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ class ListDeTache extends StatefulWidget {
 
 class _ListDeTacheState extends State<ListDeTache> {
   List<Tache> tachesCopy = [];
+  int checked = 0;
 
   @override
   void initState() {
@@ -26,19 +27,24 @@ class _ListDeTacheState extends State<ListDeTache> {
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: ListView.builder(
-          itemCount:
-              tachesCopy.where((tache) => tache.getFind() == true).length,
+          itemCount: endsTasks == 0
+              ? tachesCopy.where((tache) => tache.getFind() == true).length
+              : tachesCopy.where((tache) => tache.getStatut() == true).length,
           itemBuilder: (context, i) {
-            Tache tache = tachesCopy
-                .where((tache) => tache.getFind() == true)
-                .toList()[i];
+            Tache tache = endsTasks == 0
+                ? tachesCopy
+                    .where((tache) => tache.getFind() == true)
+                    .toList()[i]
+                : tachesCopy
+                    .where((tache) => tache.getStatut() == true)
+                    .toList()[i];
             return ListBody(
               children: [
                 Opacity(
                     opacity: 1.0,
                     child: Container(
                       margin: EdgeInsets.all(10),
-                      height: 100,
+                      height: 115,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 214, 230, 214),
@@ -47,15 +53,16 @@ class _ListDeTacheState extends State<ListDeTache> {
                       child: Column(
                         children: [
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
+                                // tache.titre,
                                 tache.titre,
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 112, 6),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline),
+                                  color: Color.fromARGB(255, 0, 112, 6),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               SizedBox(height: 5),
                               Text(
@@ -90,8 +97,7 @@ class _ListDeTacheState extends State<ListDeTache> {
                                         tachesCopy.removeWhere((element) =>
                                             element.id == tache.getId());
                                       });
-                                      taches.removeWhere((element) =>
-                                          element.id == tache.getId());
+                                      setTache(tachesCopy);
                                     },
                                     child: Icon(
                                       Icons.delete,

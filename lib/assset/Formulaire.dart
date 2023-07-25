@@ -12,6 +12,7 @@ class Formulaire extends StatefulWidget {
 
 class _FormulaireState extends State<Formulaire> {
   final _formkey = GlobalKey<FormState>();
+  List<Tache> tachesCopy = taches;
   String titre = '';
   String description = '';
   bool ok1 = false;
@@ -88,13 +89,14 @@ class _FormulaireState extends State<Formulaire> {
                       child: TextButton(
                         onPressed: () {
                           _formkey.currentState?.save();
-                          taches.add(Tache(titre, description));
+                          tachesCopy.add(Tache(titre, description));
                           setState(() {
                             ok = ok1 = ok2 = false;
                             titre = description = '';
                           });
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (builder) => Home()));
+                          setTache(tachesCopy);
                         },
                         child: Text('Enregistrer',
                             style: TextStyle(

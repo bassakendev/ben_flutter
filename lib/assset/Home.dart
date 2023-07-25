@@ -12,7 +12,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Tache> tacheCopy = taches;
+  void iconIndex(id) {
+    setState(() {
+      endsTasks = id;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +50,29 @@ class _HomeState extends State<Home> {
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Recherche(),
+      ),
+      bottomNavigationBar: Container(
+        height: 70.0, // Hauteur du footer
+        color: Colors.green, // Couleur de fond du footer
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          IconButton(
+              color: endsTasks == 0 ? Colors.white : Colors.black,
+              iconSize: 35,
+              onPressed: () => {
+                    iconIndex(0),
+                  },
+              icon: Icon(Icons.work_history)),
+          SizedBox(
+            width: 70,
+          ),
+          IconButton(
+              color: endsTasks == 1 ? Colors.white : Colors.black,
+              iconSize: 35,
+              onPressed: () => {
+                    iconIndex(1),
+                  },
+              icon: Icon(Icons.task_alt_rounded))
+        ]),
       ),
     );
   }
