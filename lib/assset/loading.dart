@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../dataBase/Tache.dart';
+import '/dataBase/Tache.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -13,7 +13,9 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: light ? ThemeData.light() : ThemeData.dark(),
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: light ? ThemeMode.light : ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         title: 'Bassakendev',
         home: Scaffold(

@@ -462,3 +462,93 @@ List<int> additionalElements = [4, 5, 6];
 myArray.addAll(additionalElements);
 
 print(myArray); // Affiche [1, 2, 3, 4, 5, 6]
+
+///////////////////////////////////// Mode nuit ///////////////////////////////////////////////////////
+
+Pour gérer le mode nuit et light dans une application Flutter, vous pouvez utiliser le package flutter_bloc en combinaison avec les fonctionnalités de thème de Flutter.
+
+Voici les étapes pour implémenter le mode nuit et light dans votre application Flutter :
+
+Ajoutez le package flutter_bloc à votre fichier pubspec.yaml :
+Code
+Copy code
+1dependencies:
+2  flutter_bloc: ^7.0.0
+Créez un fichier theme_bloc.dart pour définir un bloc qui gère l'état du thème :
+Code
+Copy code
+1dart
+2import 'package:flutter_bloc/flutter_bloc.dart';
+3
+4enum ThemeModeEvent { toggle }
+5
+6class ThemeModeBloc extends Bloc<ThemeModeEvent, bool> {
+7  ThemeModeBloc() : super(false);
+8
+9  @override
+10  Stream<bool> mapEventToState(ThemeModeEvent event) async* {
+11    if (event == ThemeModeEvent.toggle) {
+12      yield !state;
+13    }
+14  }
+15}
+Créez un fichier main.dart pour initialiser le bloc et définir les thèmes de votre application :
+Code
+Copy code
+1dart
+2import 'package:flutter/material.dart';
+3import 'package:flutter_bloc/flutter_bloc.dart';
+4
+5import 'theme_bloc.dart';
+6
+7void main() {
+8  runApp(MyApp());
+9}
+10
+11class MyApp extends StatelessWidget {
+12  @override
+13  Widget build(BuildContext context) {
+14    return BlocProvider(
+15      create: (context) => ThemeModeBloc(),
+16      child: BlocBuilder<ThemeModeBloc, bool>(
+17        builder: (context, isDarkMode) {
+18          return MaterialApp(
+19            theme: ThemeData.light(),
+20            darkTheme: ThemeData.dark(),
+21            themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+22            home: HomeScreen(),
+23          );
+24        },
+25      ),
+26    );
+27  }
+28}
+29
+30class HomeScreen extends StatelessWidget {
+31  @override
+32  Widget build(BuildContext context) {
+33    final themeModeBloc = BlocProvider.of<ThemeModeBloc>(context);
+34
+35    return Scaffold(
+36      appBar: AppBar(
+37        title: Text('Mode nuit / light'),
+38      ),
+39      body: Center(
+40        child: ElevatedButton(
+41          onPressed: () {
+42            themeModeBloc.add(ThemeModeEvent.toggle);
+43          },
+44          child: Text('Changer le thème'),
+45        ),
+46      ),
+47    );
+48  }
+49}
+
+Dans cet exemple, nous utilisons flutter_bloc pour gérer l'état du thème de l'application. Le ThemeModeBloc est responsable de la gestion de l'état du thème et de la bascule entre les modes nuit et light.
+
+Dans MyApp, nous enveloppons notre MaterialApp avec BlocProvider pour fournir l'instance du ThemeModeBloc à l'ensemble de l'application. Nous utilisons ensuite BlocBuilder pour reconstruire l'interface utilisateur chaque fois que l'état du thème change.
+
+Dans HomeScreen, nous récupérons l'instance du ThemeModeBloc à l'aide de BlocProvider.of et utilisons un ElevatedButton pour déclencher l'événement ThemeModeEvent.toggle, ce qui permet de basculer entre les modes nuit et light.
+
+Ainsi, lorsque vous appuyez sur le bouton "Changer le thème", le thème de l'application sera mis à jour en conséquence.

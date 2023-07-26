@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, must_be_immutable, file_names, library_private_types_in_public_api, unused_local_variable
 
-import 'Home.dart';
+import '../assset/Home.dart';
 import 'package:flutter/material.dart';
 import '../dataBase/Tache.dart';
 
@@ -19,15 +19,23 @@ class _FormulaireState extends State<Formulaire> {
   bool ok = false;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: light ? ThemeData.light() : ThemeData.dark(),
-        debugShowCheckedModeBanner: false,
-        title: 'Bassakendev',
-        home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: Text('Nouvelle Tache'),
-              backgroundColor:
-                  light ? Colors.green : Color.fromARGB(255, 33, 68, 35),
+          title: Row(children: [
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (builder) => Home()));
+                },
+                child: Icon(
+                  Icons.home,
+                  color: Colors.white,
+                )),
+            Spacer(),
+            Text('Nouvelle Tache')
+          ]),
+          backgroundColor:
+              light ? Colors.green : Color.fromARGB(255, 33, 68, 35),
           titleTextStyle: TextStyle(
             letterSpacing: 5,
             color: Colors.white,
@@ -99,24 +107,22 @@ class _FormulaireState extends State<Formulaire> {
                             titre = description = '';
                           });
                           Navigator.pushReplacement(context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => Home()));
+                              MaterialPageRoute(builder: (builder) => Home()));
                         },
                         child: Text('Enregistrer',
                             style: TextStyle(
                               color: Colors.white,
                             )),
                         style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(light
-                                  ? Colors.green
-                                  : Color.fromARGB(255, 101, 133, 102)),
+                          backgroundColor: MaterialStatePropertyAll(light
+                              ? Colors.green
+                              : Color.fromARGB(255, 101, 133, 102)),
                         ),
                       ),
                     )),
               ),
             ),
           ]),
-            )));
+        ));
   }
 }

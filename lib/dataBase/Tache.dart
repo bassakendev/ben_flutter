@@ -2,6 +2,7 @@
 
 class Tache {
   static int lastId = -1;
+  static bool lum = false;
   String titre;
   String description;
   int id = 0;

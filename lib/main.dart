@@ -10,12 +10,15 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   Future<void> _loadResources() async {
     // Simulate loading resources
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 1));
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Bassakendev',
+        home: FutureBuilder<void>(
             future: _loadResources(),
             builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -23,6 +26,6 @@ class MyApp extends StatelessWidget {
               } else {
                 return Home();
               }
-        });
+            }));
   }
 }

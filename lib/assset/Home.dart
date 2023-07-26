@@ -1,6 +1,6 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable, library_private_types_in_public_api
 
-import 'Formulaire.dart';
+import '../TacheOpperation/TacheOpperation.dart';
 import 'Recherche.dart';
 import '../dataBase/Tache.dart';
 
@@ -27,7 +27,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: light ? ThemeData.light() : ThemeData.dark(),
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: light ? ThemeMode.light : ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         title: 'Bassakendev',
         home: Scaffold(
@@ -43,8 +45,13 @@ class _HomeState extends State<Home> {
                         : Color.fromARGB(255, 209, 209, 209)),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Formulaire()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TacheOpperation(
+                                opperation: 'create-task',
+                                titre: '',
+                                description: '')));
                   },
                   child: Row(children: [
                     Text('Créer',

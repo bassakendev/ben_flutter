@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
-import 'ShowTache.dart';
+import '../TacheOpperation/ShowTache.dart';
 import 'package:flutter/material.dart';
+import '../TacheOpperation/TacheOpperation.dart';
 import '../dataBase/Tache.dart';
 
 class ListDeTache extends StatefulWidget {
@@ -118,7 +119,9 @@ class _ListDeTacheState extends State<ListDeTache> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (builder) => ShowTache(
+                                                builder: (builder) =>
+                                                    TacheOpperation(
+                                                      opperation: '',
                                                       titre: tache.titre,
                                                       description:
                                                           tache.description,

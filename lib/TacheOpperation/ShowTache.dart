@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../dataBase/Tache.dart';
+
 class ShowTache extends StatefulWidget {
   final String titre;
   final String description;
@@ -18,7 +20,7 @@ class _TacheState extends State<ShowTache> {
     return Scaffold(
       appBar: AppBar(
         title: Text(titre),
-        backgroundColor: Colors.green,
+        backgroundColor: light ? Colors.green : Color.fromARGB(255, 33, 68, 35),
         titleTextStyle: TextStyle(
           letterSpacing: 5,
           color: Colors.white,
