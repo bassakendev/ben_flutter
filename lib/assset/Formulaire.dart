@@ -2,8 +2,7 @@
 
 import 'Home.dart';
 import 'package:flutter/material.dart';
-
-import 'Tache.dart';
+import '../dataBase/Tache.dart';
 
 class Formulaire extends StatefulWidget {
   @override
@@ -20,10 +19,15 @@ class _FormulaireState extends State<Formulaire> {
   bool ok = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+        theme: light ? ThemeData.light() : ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        title: 'Bassakendev',
+        home: Scaffold(
         appBar: AppBar(
           title: Text('Nouvelle Tache'),
-          backgroundColor: Colors.green,
+              backgroundColor:
+                  light ? Colors.green : Color.fromARGB(255, 33, 68, 35),
           titleTextStyle: TextStyle(
             letterSpacing: 5,
             color: Colors.white,
@@ -95,8 +99,8 @@ class _FormulaireState extends State<Formulaire> {
                             titre = description = '';
                           });
                           Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (builder) => Home()));
-                          setTache(tachesCopy);
+                                  MaterialPageRoute(
+                                      builder: (builder) => Home()));
                         },
                         child: Text('Enregistrer',
                             style: TextStyle(
@@ -104,13 +108,15 @@ class _FormulaireState extends State<Formulaire> {
                             )),
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStatePropertyAll(Colors.green),
+                              MaterialStatePropertyAll(light
+                                  ? Colors.green
+                                  : Color.fromARGB(255, 101, 133, 102)),
                         ),
                       ),
                     )),
               ),
             ),
           ]),
-        ));
+            )));
   }
 }

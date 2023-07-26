@@ -2,7 +2,7 @@
 
 import 'ShowTache.dart';
 import 'package:flutter/material.dart';
-import 'Tache.dart';
+import '../dataBase/Tache.dart';
 
 class ListDeTache extends StatefulWidget {
   final List<Tache> taches;
@@ -28,15 +28,23 @@ class _ListDeTacheState extends State<ListDeTache> {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: ListView.builder(
           itemCount: endsTasks == 0
-              ? tachesCopy.where((tache) => tache.getFind() == true).length
-              : tachesCopy.where((tache) => tache.getStatut() == true).length,
+              ? tachesCopy
+                  .where((tache) =>
+                      tache.getFind() == true && tache.getStatut() == false)
+                  .length
+              : tachesCopy
+                  .where((tache) =>
+                      tache.getStatut() == true && tache.getFind() == true)
+                  .length,
           itemBuilder: (context, i) {
             Tache tache = endsTasks == 0
                 ? tachesCopy
-                    .where((tache) => tache.getFind() == true)
+                    .where((tache) =>
+                        tache.getFind() == true && tache.getStatut() == false)
                     .toList()[i]
                 : tachesCopy
-                    .where((tache) => tache.getStatut() == true)
+                    .where((tache) =>
+                        tache.getStatut() == true && tache.getFind() == true)
                     .toList()[i];
             return ListBody(
               children: [
@@ -47,7 +55,9 @@ class _ListDeTacheState extends State<ListDeTache> {
                       height: 115,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 214, 230, 214),
+                        color: light
+                            ? Color.fromARGB(255, 214, 230, 214)
+                            : Color.fromARGB(255, 103, 109, 103),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
@@ -97,7 +107,6 @@ class _ListDeTacheState extends State<ListDeTache> {
                                         tachesCopy.removeWhere((element) =>
                                             element.id == tache.getId());
                                       });
-                                      setTache(tachesCopy);
                                     },
                                     child: Icon(
                                       Icons.delete,

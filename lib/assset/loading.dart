@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../dataBase/Tache.dart';
+
 class Loading extends StatefulWidget {
   @override
   _LoadingState createState() => _LoadingState();
@@ -10,21 +12,28 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Padding(
-        padding: EdgeInsets.all(30),
-        child: Text(
-          'Todo-List',
-          style: TextStyle(
-              fontSize: 40, fontWeight: FontWeight.bold, color: Colors.green),
-        ),
-      ),
-      CircularProgressIndicator(
-        color: Colors.green,
-      ),
-    ])));
+    return MaterialApp(
+        theme: light ? ThemeData.light() : ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        title: 'Bassakendev',
+        home: Scaffold(
+            body: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+              Padding(
+                padding: EdgeInsets.all(30),
+                child: Text(
+                  'Todo-List',
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green),
+                ),
+              ),
+              CircularProgressIndicator(
+                color: Colors.green,
+              ),
+            ]))));
   }
 }

@@ -2,7 +2,7 @@
 
 import 'Formulaire.dart';
 import 'Recherche.dart';
-import 'Tache.dart';
+import '../dataBase/Tache.dart';
 
 import 'package:flutter/material.dart';
 
@@ -18,62 +18,94 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void changeMode() {
+    setState(() {
+      light = !light;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(children: [
-          Text('Taches'),
-          Spacer(),
-          TextButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.white),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Formulaire()));
-              },
-              child: Row(children: [
-                Text('Créer', style: TextStyle(color: Colors.green)),
-                Icon(Icons.add_box, color: Colors.green)
-              ])),
-        ]),
-        backgroundColor: Colors.green,
-        titleTextStyle: TextStyle(
-          letterSpacing: 5,
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.w900,
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Recherche(),
-      ),
-      bottomNavigationBar: Container(
-        height: 70.0, // Hauteur du footer
-        color: Colors.green, // Couleur de fond du footer
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          IconButton(
-              color: endsTasks == 0 ? Colors.white : Colors.black,
-              iconSize: 35,
-              onPressed: () => {
-                    iconIndex(0),
+    return MaterialApp(
+        theme: light ? ThemeData.light() : ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        title: 'Bassakendev',
+        home: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Row(children: [
+              Text('Taches'),
+              Spacer(),
+              TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(light
+                        ? Colors.white
+                        : Color.fromARGB(255, 209, 209, 209)),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Formulaire()));
                   },
-              icon: Icon(Icons.work_history)),
-          SizedBox(
-            width: 70,
+                  child: Row(children: [
+                    Text('Créer',
+                        style: TextStyle(
+                            color: light
+                                ? Colors.green
+                                : const Color.fromARGB(255, 40, 77, 41))),
+                    Icon(Icons.add_box,
+                        color: light
+                            ? Color.fromARGB(255, 89, 172, 90)
+                            : Color.fromARGB(255, 33, 68, 35))
+                  ])),
+            ]),
+            backgroundColor: light
+                ? Color.fromARGB(255, 89, 172, 90)
+                : const Color.fromARGB(255, 33, 68, 35),
+            titleTextStyle: TextStyle(
+              letterSpacing: 5,
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+            ),
           ),
-          IconButton(
-              color: endsTasks == 1 ? Colors.white : Colors.black,
-              iconSize: 35,
-              onPressed: () => {
-                    iconIndex(1),
-                  },
-              icon: Icon(Icons.task_alt_rounded))
-        ]),
-      ),
-    );
+          body: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Recherche(),
+          ),
+          bottomNavigationBar: Container(
+            height: 70.0, // Hauteur du footer
+            color: light
+                ? Colors.green
+                : Color.fromARGB(
+                    255, 101, 133, 102), // Couleur de fond du footer
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              IconButton(
+                  color: endsTasks == 0 ? Colors.white : Colors.black,
+                  iconSize: 35,
+                  onPressed: () => {
+                        iconIndex(0),
+                      },
+                  icon: Icon(Icons.work_history)),
+              SizedBox(
+                width: 50,
+              ),
+              IconButton(
+                  color: endsTasks == 1 ? Colors.white : Colors.black,
+                  iconSize: 35,
+                  onPressed: () => {
+                        iconIndex(1),
+                      },
+                  icon: Icon(Icons.task_alt_rounded)),
+              SizedBox(
+                width: 50,
+              ),
+              IconButton(
+                  color: light ? Colors.white : Colors.black,
+                  iconSize: 35,
+                  onPressed: () => {changeMode()},
+                  icon: light ? Icon(Icons.sunny) : Icon(Icons.nightlight))
+            ]),
+          ),
+        ));
   }
 }

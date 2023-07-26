@@ -31,7 +31,6 @@ class _TacheState extends State<ShowTache> {
           padding: EdgeInsets.all(15.0),
           child: Text(description,
               style: TextStyle(
-                color: Color.fromARGB(255, 26, 29, 26),
                 fontSize: 18,
               )),
         ),

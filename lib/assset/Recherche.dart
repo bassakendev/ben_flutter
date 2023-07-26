@@ -2,7 +2,7 @@
 
 import 'ListDeTache.dart';
 import 'package:flutter/material.dart';
-import 'Tache.dart';
+import '../dataBase/Tache.dart';
 
 class Recherche extends StatefulWidget {
   @override
