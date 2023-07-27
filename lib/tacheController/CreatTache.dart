@@ -31,14 +31,12 @@ class _CreatTacheState extends State<CreatTache> {
             appBar: AppBar(
               title: Row(children: [
                 TextButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (builder) => Home()));
-                    },
-                    child: Icon(
-                      Icons.home,
-                      color: Colors.white,
-                    )),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) => Home()));
+                  },
+                  child: Icon(size: 40, Icons.home, color: Colors.white),
+                ),
                 Spacer(),
                 Text('Nouvelle Tache')
               ]),

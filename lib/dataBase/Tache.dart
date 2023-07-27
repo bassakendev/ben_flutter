@@ -2,8 +2,8 @@
 import 'package:intl/intl.dart';
 import 'dart:core';
 
-
 DateTime now = DateTime.now();
+
 class Tache {
   static int lastId = -1;
   String titre;
@@ -39,11 +39,7 @@ class Tache {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'titre': titre,
-      'description': description,
-      'createdAt': createdAt
-    };
+    return {'titre': titre, 'description': description, 'createdAt': createdAt};
   }
 
   // Implement toString to make it easier to see information about
@@ -61,13 +57,15 @@ List<Tache> taches = [
       DateFormat('MMM d HH:mm').format(now)),
   Tache('Cheri', 'Mon coeur m\'amene chez Luidji-restaut aujourd\'hui',
       DateFormat('MMM d HH:mm').format(now)),
-  Tache('Papa',
+  Tache(
+      'Papa',
       'Papa m\'a demander de passer aujourd\'hui apparemment il aurais un soucis',
       DateFormat('MMM d HH:mm').format(now)),
-  Tache('Mes enfants',
+  Tache(
+      'Mes enfants',
       'Se soir je les ais promis d\'aller au cinemat faut pas que je gaf car je les connais',
       DateFormat('MMM d HH:mm').format(now))
 ];
 
-int endsTasks = 0;
+int indexIconFooter = 0;
 bool light = false;

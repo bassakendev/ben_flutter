@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import '../controller/TacheController.dart';
+import '../tacheController/TacheController.dart';
 import '../dataBase/Tache.dart';
 
 class ListDeTache extends StatefulWidget {
@@ -28,7 +28,7 @@ class _ListDeTacheState extends State<ListDeTache> {
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: ListView.builder(
-          itemCount: endsTasks == 0
+          itemCount: indexIconFooter == 0
               ? tachesCopy
                   .where((tache) =>
                       tache.getFind() == true && tache.getStatut() == false)
@@ -38,7 +38,7 @@ class _ListDeTacheState extends State<ListDeTache> {
                       tache.getStatut() == true && tache.getFind() == true)
                   .length,
           itemBuilder: (context, i) {
-            Tache tache = endsTasks == 0
+            Tache tache = indexIconFooter == 0
                 ? tachesCopy
                     .where((tache) =>
                         tache.getFind() == true && tache.getStatut() == false)
@@ -47,18 +47,14 @@ class _ListDeTacheState extends State<ListDeTache> {
                     .where((tache) =>
                         tache.getStatut() == true && tache.getFind() == true)
                     .toList()[i];
-            return ListBody(
-              children: [
-                Opacity(
-                    opacity: 1.0,
-                    child: Container(
+            return Container(
                       margin: EdgeInsets.all(10),
                       height: 115,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: light
                             ? Color.fromARGB(255, 214, 230, 214)
-                            : Color.fromARGB(255, 103, 109, 103),
+                    : Color.fromARGB(255, 82, 99, 82),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
@@ -70,7 +66,9 @@ class _ListDeTacheState extends State<ListDeTache> {
                                 // tache.titre,
                                 tache.titre,
                                 style: TextStyle(
-                                  color: Color.fromARGB(255, 0, 112, 6),
+                          color: light
+                              ? Color.fromARGB(255, 0, 112, 6)
+                              : Color.fromARGB(255, 33, 68, 35),
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -159,8 +157,7 @@ class _ListDeTacheState extends State<ListDeTache> {
                           ),
                         ],
                       ),
-                    ))
-              ],
+                
             );
           },
         ),
