@@ -1,15 +1,19 @@
 // ignore_for_file: file_names, unused_local_variable
+import 'package:intl/intl.dart';
+import 'dart:core';
 
+
+DateTime now = DateTime.now();
 class Tache {
   static int lastId = -1;
-  static bool lum = false;
   String titre;
   String description;
+  String createdAt;
   int id = 0;
   bool statut = false;
   bool find = true;
 
-  Tache(this.titre, this.description) {
+  Tache(this.titre, this.description, this.createdAt) {
     lastId++;
     id = lastId;
   }
@@ -38,6 +42,7 @@ class Tache {
     return {
       'titre': titre,
       'description': description,
+      'createdAt': createdAt
     };
   }
 
@@ -50,13 +55,18 @@ class Tache {
 }
 
 List<Tache> taches = [
-  Tache('Vaccances', 'Je doit aller à Dubai avec ma famille l\'hiver prochain'),
-  Tache('Football', 'Cet aprem j\'ai un match tres important à jouer'),
-  Tache('Cheri', 'Mon coeur m\'amene chez Luidji-restaut aujourd\'hui'),
+  Tache('Vaccances', 'Je doit aller à Dubai avec ma famille l\'hiver prochain',
+      DateFormat('MMM d HH:mm').format(now)),
+  Tache('Football', 'Cet aprem j\'ai un match tres important à jouer',
+      DateFormat('MMM d HH:mm').format(now)),
+  Tache('Cheri', 'Mon coeur m\'amene chez Luidji-restaut aujourd\'hui',
+      DateFormat('MMM d HH:mm').format(now)),
   Tache('Papa',
-      'Papa m\'a demander de passer aujourd\'hui apparemment il aurais un soucis'),
+      'Papa m\'a demander de passer aujourd\'hui apparemment il aurais un soucis',
+      DateFormat('MMM d HH:mm').format(now)),
   Tache('Mes enfants',
-      'Se soir je les ais promis d\'aller au cinemat faut pas que je gaf car je les connais')
+      'Se soir je les ais promis d\'aller au cinemat faut pas que je gaf car je les connais',
+      DateFormat('MMM d HH:mm').format(now))
 ];
 
 int endsTasks = 0;

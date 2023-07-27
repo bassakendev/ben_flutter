@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_literals_to_create_immutables
 
-import '../TacheOpperation/ShowTache.dart';
 import 'package:flutter/material.dart';
-import '../TacheOpperation/TacheOpperation.dart';
+import '../controller/TacheController.dart';
 import '../dataBase/Tache.dart';
 
 class ListDeTache extends StatefulWidget {
@@ -24,6 +23,7 @@ class _ListDeTacheState extends State<ListDeTache> {
 
   @override
   Widget build(BuildContext context) {
+    tachesCopy.sort((a, b) => b.getId().compareTo(a.getId()));
     return Expanded(
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -120,19 +120,41 @@ class _ListDeTacheState extends State<ListDeTache> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (builder) =>
-                                                    TacheOpperation(
-                                                      opperation: '',
-                                                      titre: tache.titre,
-                                                      description:
-                                                          tache.description,
-                                                    )));
+                                                    TacheController(
+                                                        opperation: 'show',
+                                                        titre: tache.titre,
+                                                        description:
+                                                            tache.description,
+                                                        id: 0)));
                                       },
                                       child: Icon(
                                         Icons.remove_red_eye_rounded,
                                         color: Color.fromARGB(255, 6, 129, 129),
+                                      )),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (builder) =>
+                                                    TacheController(
+                                                        opperation: 'update',
+                                                        titre: tache.titre,
+                                                        description:
+                                                            tache.description,
+                                                        id: tache.getId())));
+                                      },
+                                      child: Icon(Icons.edit,
+                                          color: light
+                                              ? Colors.black
+                                              : Colors.white
                                       ))
                                 ],
                               ),
+                              Row(children: [
+                                Spacer(),
+                                Text(tache.createdAt),
+                              ])
                             ],
                           ),
                         ],

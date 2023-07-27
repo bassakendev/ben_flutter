@@ -1,6 +1,6 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable, library_private_types_in_public_api
 
-import '../TacheOpperation/TacheOpperation.dart';
+import '../controller/TacheController.dart';
 import 'Recherche.dart';
 import '../dataBase/Tache.dart';
 
@@ -48,10 +48,11 @@ class _HomeState extends State<Home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TacheOpperation(
-                                opperation: 'create-task',
+                            builder: (context) => TacheController(
+                                opperation: 'create',
                                 titre: '',
-                                description: '')));
+                                description: '',
+                                id: 0)));
                   },
                   child: Row(children: [
                     Text('Créer',

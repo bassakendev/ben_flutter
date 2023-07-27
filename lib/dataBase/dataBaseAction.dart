@@ -24,7 +24,7 @@ class DataBaseAction {
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         return db.execute(
-          'CREATE TABLE taches(id INTEGER PRIMARY KEY AUTOINCREMENT, titre TEXT, description TEXT)',
+          'CREATE TABLE taches(id INTEGER PRIMARY KEY AUTOINCREMENT, titre TEXT, description TEXT, createdAt TEXT)',
         );
       },
       // Set the version. This executes the onCreate function and provides a
@@ -59,22 +59,28 @@ class DataBaseAction {
 
     // Convert the List<Map<String, dynamic> into a List<task>.
     return List.generate(maps.length, (i) {
-      return Tache(maps[i]['titre'], maps[i]['description']);
+      return Tache(
+          maps[i]['titre'], maps[i]['description'], maps[i]['createdAt']);
     });
   }
 
-  Future<void> updateTache(Tache tache) async {
+  Future<void> updateTache(int id, String titre, String description) async {
     // Get a reference to the database.
     final db = database;
-
+    
+    // Create a map of the updated values.
+    final updatedValues = {
+      'titre': titre,
+      'description': description,
+    };
     // Update the given task.
     await db!.update(
       'taches',
-      tache.toMap(),
+      updatedValues,
       // Ensure that the task has a matching id.
       where: 'id = ?',
       // Pass the task's id as a whereArg to prevent SQL injection.
-      whereArgs: [tache.id],
+      whereArgs: [id],
     );
   }
 
