@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../appAppearance/AppAppearance.dart';
 import '../../dataBase/Tache.dart';
 import '../../main.dart';
 
@@ -11,12 +12,15 @@ class Mode extends StatefulWidget {
 }
 
 class _ModeState extends State<Mode> {
+  AppAppearance app = AppAppearance();
+
   int tape = light ? 0 : 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: app.appearance(light, themes).primaryColor,
         title: Text('Choisir un mode'),
       ),
       body: Center(
@@ -79,7 +83,9 @@ class _ModeState extends State<Mode> {
         width: 100,
         height: 100,
         decoration: BoxDecoration(
-          color: tape == modeId ? Colors.green : Colors.transparent,
+          color: tape == modeId
+              ? app.appearance(light, themes).secondlyColor
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(

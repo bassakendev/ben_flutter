@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../appAppearance/AppAppearance.dart';
 import '../../dataBase/Tache.dart';
 import '../../main.dart';
 
@@ -11,12 +12,15 @@ class Themes extends StatefulWidget {
 }
 
 class _ThemesState extends State<Themes> {
+  AppAppearance app = AppAppearance();
+
   String selectedColor = 'Vert';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: app.appearance(light, themes).primaryColor,
         title: Text('Choisir une couleur'),
       ),
       body: Center(

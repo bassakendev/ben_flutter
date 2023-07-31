@@ -2,18 +2,24 @@
 
 import 'package:flutter/material.dart';
 
+import '../../appAppearance/AppAppearance.dart';
+import '../../dataBase/Tache.dart';
+
 class Langues extends StatefulWidget {
   @override
   _LanguesState createState() => _LanguesState();
 }
 
 class _LanguesState extends State<Langues> {
+  AppAppearance app = AppAppearance();
+
   String selectedLanguage = 'Français';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: app.appearance(light, themes).primaryColor,
         title: Text('Choisir une langue'),
       ),
       body: Center(
@@ -49,7 +55,7 @@ class _LanguesState extends State<Langues> {
               width: 200,
               height: 50,
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: app.appearance(light, themes).secondlyColor,
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey),
               ),
@@ -78,7 +84,7 @@ class _LanguesState extends State<Langues> {
         height: 100,
         decoration: BoxDecoration(
           color: selectedLanguage == languageName
-              ? Colors.green
+              ? app.appearance(light, themes).secondlyColor
               : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [

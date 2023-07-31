@@ -3,6 +3,7 @@
 import '../../../assset/Home.dart';
 import 'package:flutter/material.dart';
 import '../../../dataBase/Tache.dart';
+import '../../appAppearance/AppAppearance.dart';
 
 class UpdateTache extends StatefulWidget {
   int id;
@@ -12,6 +13,8 @@ class UpdateTache extends StatefulWidget {
 }
 
 class _UpdateTacheState extends State<UpdateTache> {
+  AppAppearance app = AppAppearance();
+
   final _formkey = GlobalKey<FormState>();
   List<Tache> tachesCopy = taches;
   bool ok1 = false;
@@ -42,8 +45,7 @@ class _UpdateTacheState extends State<UpdateTache> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Modifier'),
-          backgroundColor:
-              light ? Colors.green : Color.fromARGB(255, 33, 68, 35),
+          backgroundColor: app.appearance(light, themes).primaryColor,
           titleTextStyle: TextStyle(
             letterSpacing: 5,
             color: Colors.white,
@@ -60,12 +62,13 @@ class _UpdateTacheState extends State<UpdateTache> {
                 style: TextStyle(fontSize: 22.0),
                 controller: titreController,
                 maxLines: null,
-                cursorColor: Colors.green,
+                cursorColor: app.appearance(light, themes).secondlyColor,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   labelText: 'Titre...',
                   labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 197, 241, 200), fontSize: 30),
+                      color: app.appearance(light, themes).secondlyColor,
+                      fontSize: 30),
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -81,13 +84,13 @@ class _UpdateTacheState extends State<UpdateTache> {
                 child: TextField(
                   style: TextStyle(fontSize: 22.0),
                   controller: descriptionController,
-                  cursorColor: Colors.green,
+                  cursorColor: app.appearance(light, themes).secondlyColor,
                   maxLines: null,
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       labelText: 'Description...',
                       labelStyle: TextStyle(
-                        color: Color.fromARGB(255, 186, 226, 189),
+                        color: app.appearance(light, themes).secondlyColor,
                         fontSize: 18,
                       )),
                   onChanged: (value) {
@@ -127,9 +130,8 @@ class _UpdateTacheState extends State<UpdateTache> {
                               color: Colors.white,
                             )),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(light
-                              ? Colors.green
-                              : Color.fromARGB(255, 101, 133, 102)),
+                          backgroundColor: MaterialStatePropertyAll(
+                              app.appearance(light, themes).secondlyColor),
                         ),
                       ),
                     )),

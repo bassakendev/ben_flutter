@@ -25,13 +25,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        themeMode: light ? ThemeMode.light : ThemeMode.dark,
-        debugShowCheckedModeBanner: false,
-        title: 'Bassakendev',
-        home: WillPopScope(
+    return WillPopScope(
             onWillPop: () async {
               // Action à effectuer lorsque l'utilisateur appuie sur la touche physique de retour
               SystemNavigator.pop();
@@ -116,6 +110,6 @@ class _HomeState extends State<Home> {
                       icon: Icon(Icons.settings))
                 ]),
               ),
-            ))));
+        )));
   }
 }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../dataBase/Tache.dart';
+import '../../appAppearance/AppAppearance.dart';
 
 class ShowTache extends StatefulWidget {
   final String titre;
@@ -13,6 +14,7 @@ class ShowTache extends StatefulWidget {
 }
 
 class _TacheState extends State<ShowTache> {
+  AppAppearance app = AppAppearance();
   @override
   Widget build(BuildContext context) {
     String titre = widget.titre;
@@ -20,7 +22,7 @@ class _TacheState extends State<ShowTache> {
     return Scaffold(
       appBar: AppBar(
         title: Text(titre),
-        backgroundColor: light ? Colors.green : Color.fromARGB(255, 33, 68, 35),
+        backgroundColor: app.appearance(light, themes).primaryColor,
         titleTextStyle: TextStyle(
           letterSpacing: 5,
           color: Colors.white,

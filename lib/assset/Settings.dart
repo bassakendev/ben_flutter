@@ -1,13 +1,18 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, file_names
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, file_names, must_be_immutable
 
 import 'package:flutter/material.dart';
+import '../appAppearance/AppAppearance.dart';
 import '../controller/settingController/SettingsController.dart';
+import '../dataBase/Tache.dart';
 
 class Settings extends StatelessWidget {
+  AppAppearance app = AppAppearance();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: app.appearance(light, themes).primaryColor,
         title: Text('Réglages'),
       ),
       body: ListView(

@@ -6,12 +6,15 @@ import '../../../dataBase/Tache.dart';
 import 'package:intl/intl.dart';
 import 'dart:core';
 
+import '../../appAppearance/AppAppearance.dart';
+
 class CreatTache extends StatefulWidget {
   @override
   _CreatTacheState createState() => _CreatTacheState();
 }
 
 class _CreatTacheState extends State<CreatTache> {
+  AppAppearance app = AppAppearance();
   final _formkey = GlobalKey<FormState>();
   List<Tache> tachesCopy = taches;
   String titre = '';
@@ -24,8 +27,7 @@ class _CreatTacheState extends State<CreatTache> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Nouvelle Tache'),
-          backgroundColor:
-              light ? Colors.green : Color.fromARGB(255, 33, 68, 35),
+          backgroundColor: app.appearance(light, themes).primaryColor,
           titleTextStyle: TextStyle(
             letterSpacing: 5,
             color: Colors.white,
@@ -41,12 +43,13 @@ class _CreatTacheState extends State<CreatTache> {
               child: TextField(
                 style: TextStyle(fontSize: 22.0),
                 maxLines: null,
-                cursorColor: Colors.green,
+                cursorColor: app.appearance(light, themes).secondlyColor,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   labelText: 'Titre...',
                   labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 197, 241, 200), fontSize: 30),
+                      color: app.appearance(light, themes).secondlyColor,
+                      fontSize: 30),
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -62,13 +65,13 @@ class _CreatTacheState extends State<CreatTache> {
                 padding: EdgeInsets.all(15.0),
                 child: TextField(
                   style: TextStyle(fontSize: 22.0),
-                  cursorColor: Colors.green,
+                  cursorColor: app.appearance(light, themes).secondlyColor,
                   maxLines: null,
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       labelText: 'Description...',
                       labelStyle: TextStyle(
-                        color: Color.fromARGB(255, 186, 226, 189),
+                        color: app.appearance(light, themes).secondlyColor,
                         fontSize: 18,
                       )),
                   onChanged: (value) {
@@ -110,9 +113,8 @@ class _CreatTacheState extends State<CreatTache> {
                               color: Colors.white,
                             )),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(light
-                              ? Colors.green
-                              : Color.fromARGB(255, 101, 133, 102)),
+                          backgroundColor: MaterialStatePropertyAll(
+                              app.appearance(light, themes).primaryColor),
                         ),
                       ),
                     )),
