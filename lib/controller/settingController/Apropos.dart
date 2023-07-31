@@ -66,7 +66,7 @@ class _AproposState extends State<Apropos> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  '- Ajouter des tâches avec une description et une date de création',
+                  '- jouAter des tâches avec une description et une date de création',
                   style: TextStyle(
                     fontSize: 16,
                   ),
