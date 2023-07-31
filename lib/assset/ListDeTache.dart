@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import '../appAppearance/AppAppearance.dart';
 import '../controller/tacheController/TacheController.dart';
 import '../dataBase/Tache.dart';
 
@@ -14,6 +15,7 @@ class ListDeTache extends StatefulWidget {
 class _ListDeTacheState extends State<ListDeTache> {
   List<Tache> tachesCopy = [];
   int checked = 0;
+  AppAppearance app = AppAppearance();
 
   @override
   void initState() {
@@ -52,9 +54,7 @@ class _ListDeTacheState extends State<ListDeTache> {
                       height: 115,
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: light
-                            ? Color.fromARGB(255, 214, 230, 214)
-                    : Color.fromARGB(255, 82, 99, 82),
+                color: app.appearance(light, themes).tertiaryColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
@@ -66,9 +66,7 @@ class _ListDeTacheState extends State<ListDeTache> {
                                 // tache.titre,
                                 tache.titre,
                                 style: TextStyle(
-                          color: light
-                              ? Color.fromARGB(255, 0, 112, 6)
-                              : Color.fromARGB(255, 33, 68, 35),
+                          color: app.appearance(light, themes).secondlyColor,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -94,7 +92,10 @@ class _ListDeTacheState extends State<ListDeTache> {
                                       });
                                     },
                                     child: tache.getStatut()
-                                        ? Icon(Icons.check, color: Colors.green)
+                                ? Icon(Icons.check,
+                                    color: app
+                                        .appearance(light, themes)
+                                        .secondlyColor)
                                         : Text('En attente...',
                                             style: TextStyle(
                                                 color: Color.fromARGB(

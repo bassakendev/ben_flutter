@@ -3,9 +3,12 @@
 import 'dart:ui';
 
 class AppearanceContainer {
-  final Color primaryColor;
-  final Color secondlyColor;
+  Color primaryColor;
+  Color secondlyColor;
+  Color tertiaryColor;
 
   AppearanceContainer(
-      {required this.primaryColor, required this.secondlyColor});
+      {required this.primaryColor,
+      required this.secondlyColor,
+      required this.tertiaryColor});
 }

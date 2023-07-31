@@ -13,110 +13,150 @@ class AppAppearance {
   late Color tertiaryDarkGreen = const Color.fromARGB(255, 82, 99, 82);
 
   late Color primaryLightYellow = const Color.fromARGB(255, 230, 217, 100);
-  late Color primaryDarkYellow = const Color.fromARGB(255, 175, 163, 58);
-  late Color secondlyLightYellow = Colors.yellow;
-  late Color secondlyDarkYellow = const Color.fromARGB(255, 194, 180, 54);
+  late Color primaryDarkYellow = const Color.fromARGB(255, 133, 124, 45);
+  late Color secondlyLightYellow = const Color.fromARGB(255, 160, 145, 7);
+  late Color secondlyDarkYellow = const Color.fromARGB(255, 184, 171, 53);
+  late Color tertiaryLightYellow = const Color.fromARGB(255, 255, 253, 197);
+  late Color tertiaryDarkYellow = const Color.fromARGB(255, 156, 158, 57);
 
   late Color primaryLightRed = const Color.fromARGB(255, 218, 91, 82);
-  late Color primaryDarkRed = const Color.fromARGB(255, 124, 54, 49);
+  late Color primaryDarkRed = const Color.fromARGB(255, 99, 43, 38);
   late Color secondlyLightRed = Colors.red;
-  late Color secondlyDarkRed = const Color.fromARGB(255, 133, 34, 27);
+  late Color secondlyDarkRed = const Color.fromARGB(255, 114, 39, 33);
+  late Color tertiaryLightRed = const Color.fromARGB(255, 235, 187, 175);
+  late Color tertiaryDarkRed = const Color.fromARGB(255, 141, 65, 54);
 
   late Color primaryLightOrange = const Color.fromARGB(255, 214, 141, 32);
-  late Color primaryDarkOrange = const Color.fromARGB(255, 136, 95, 33);
+  late Color primaryDarkOrange = const Color.fromARGB(255, 126, 88, 32);
   late Color secondlyLightOrange = Colors.orange;
-  late Color secondlyDarkOrange = const Color.fromARGB(255, 155, 101, 21);
+  late Color secondlyDarkOrange = const Color.fromARGB(255, 124, 79, 11);
+  late Color tertiaryLightOrange = const Color.fromARGB(255, 253, 232, 203);
+  late Color tertiaryDarkOrange = const Color.fromARGB(255, 133, 118, 35);
 
   late Color primaryLightPinck = const Color.fromARGB(255, 218, 80, 126);
-  late Color primaryDarkPinck = const Color.fromARGB(255, 131, 29, 63);
+  late Color primaryDarkPinck = const Color.fromARGB(255, 105, 25, 52);
   late Color secondlyLightPinck = Colors.pink;
-  late Color secondlyDarkPinck = const Color.fromARGB(255, 155, 29, 71);
+  late Color secondlyDarkPinck = const Color.fromARGB(255, 99, 18, 45);
+  late Color tertiaryLightPink = const Color.fromARGB(255, 228, 204, 218);
+  late Color tertiaryDarkPink = const Color.fromARGB(255, 143, 31, 68);
 
   late Color primaryLightBlue = const Color.fromARGB(255, 57, 153, 231);
-  late Color primaryDarkBlue = const Color.fromARGB(255, 35, 85, 126);
+  late Color primaryDarkBlue = const Color.fromARGB(255, 32, 77, 114);
   late Color secondlyLightBlue = Colors.blue;
-  late Color secondlyDarkBlue = const Color.fromARGB(255, 27, 112, 182);
+  late Color secondlyDarkBlue = const Color.fromARGB(255, 9, 113, 197);
+  late Color tertiaryLightBlue = const Color.fromARGB(255, 173, 218, 255);
+  late Color tertiaryDarkBlue = const Color.fromARGB(255, 28, 82, 126);
 
   late Color primaryLightViolet = const Color.fromARGB(255, 171, 68, 189);
-  late Color primaryDarkViolet = const Color.fromARGB(255, 93, 30, 104);
+  late Color primaryDarkViolet = const Color.fromARGB(255, 80, 26, 90);
   late Color secondlyLightViolet = Colors.purple;
-  late Color secondlyDarkViolet = const Color.fromARGB(255, 124, 25, 141);
+  late Color secondlyDarkViolet = const Color.fromARGB(255, 120, 3, 141);
+  late Color tertiaryLightViolet = const Color.fromARGB(255, 243, 213, 248);
+  late Color tertiaryDarkViolet = const Color.fromARGB(255, 90, 22, 104);
 
   late Color primaryLightGrey = const Color.fromARGB(255, 153, 145, 145);
-  late Color primaryDarkGrey = const Color.fromARGB(255, 95, 94, 94);
+  late Color primaryDarkGrey = const Color.fromARGB(255, 82, 81, 81);
   late Color secondlyLightGrey = Colors.grey;
-  late Color secondlyDarkGrey = const Color.fromARGB(255, 131, 125, 125);
+  late Color secondlyDarkGrey = const Color.fromARGB(255, 189, 189, 189);
+  late Color tertiaryLightGrey = const Color.fromARGB(255, 233, 230, 230);
+  late Color tertiaryDarkGrey = const Color.fromARGB(255, 116, 114, 114);
 
-  AppearanceContainer appearance(String mode, String theme) {
-    if (mode == 'light') {
-      switch (theme) {
-        case 'green':
+  AppearanceContainer appearance(bool light, String themes) {
+    if (light) {
+      switch (themes) {
+        case 'Vert':
           return AppearanceContainer(
               primaryColor: primaryLightGreen,
-              secondlyColor: secondlyLightGreen);
-        case 'yellow':
+              secondlyColor: secondlyLightGreen,
+              tertiaryColor: tertiaryLightGreen);
+        case 'Jaune':
           return AppearanceContainer(
               primaryColor: primaryLightYellow,
-              secondlyColor: secondlyLightYellow);
-        case 'red':
+              secondlyColor: secondlyLightYellow,
+              tertiaryColor: tertiaryLightGreen);
+        case 'Rouge':
           return AppearanceContainer(
-              primaryColor: primaryLightRed, secondlyColor: secondlyLightRed);
-        case 'orange':
+              primaryColor: primaryLightRed,
+              secondlyColor: secondlyLightRed,
+              tertiaryColor: tertiaryLightRed);
+        case 'Orange':
           return AppearanceContainer(
               primaryColor: primaryLightOrange,
-              secondlyColor: secondlyLightOrange);
-        case 'pink':
+              secondlyColor: secondlyLightOrange,
+              tertiaryColor: tertiaryLightOrange);
+        case 'Rose':
           return AppearanceContainer(
               primaryColor: primaryLightPinck,
-              secondlyColor: secondlyLightPinck);
-        case 'blue':
+              secondlyColor: secondlyLightPinck,
+              tertiaryColor: tertiaryLightPink);
+        case 'Bleu':
           return AppearanceContainer(
-              primaryColor: primaryLightBlue, secondlyColor: secondlyLightBlue);
-        case 'violet':
+              primaryColor: primaryLightBlue,
+              secondlyColor: secondlyLightBlue,
+              tertiaryColor: tertiaryLightBlue);
+        case 'Violet':
           return AppearanceContainer(
               primaryColor: primaryLightViolet,
-              secondlyColor: secondlyLightViolet);
-        case 'grey':
+              secondlyColor: secondlyLightViolet,
+              tertiaryColor: tertiaryLightViolet);
+        case 'Gris':
           return AppearanceContainer(
-              primaryColor: primaryLightGrey, secondlyColor: secondlyLightGrey);
+              primaryColor: primaryLightGrey,
+              secondlyColor: secondlyLightGrey,
+              tertiaryColor: tertiaryLightGrey);
         default:
           return AppearanceContainer(
               primaryColor: primaryLightGreen,
-              secondlyColor: secondlyLightGreen);
+              secondlyColor: secondlyLightGreen,
+              tertiaryColor: tertiaryLightGreen);
       }
     } else {
-      switch (theme) {
-        case 'green':
+      switch (themes) {
+        case 'Vert':
           return AppearanceContainer(
-              primaryColor: primaryDarkGreen, secondlyColor: secondlyDarkGreen);
-        case 'yellow':
+              primaryColor: primaryDarkGreen,
+              secondlyColor: secondlyDarkGreen,
+              tertiaryColor: tertiaryDarkGreen);
+        case 'Jaune':
           return AppearanceContainer(
               primaryColor: primaryDarkYellow,
-              secondlyColor: secondlyDarkYellow);
-        case 'red':
+              secondlyColor: secondlyDarkYellow,
+              tertiaryColor: tertiaryDarkYellow);
+        case 'Rouge':
           return AppearanceContainer(
-              primaryColor: primaryDarkRed, secondlyColor: secondlyDarkRed);
-        case 'orange':
+              primaryColor: primaryDarkRed,
+              secondlyColor: secondlyDarkRed,
+              tertiaryColor: tertiaryDarkRed);
+        case 'Orange':
           return AppearanceContainer(
               primaryColor: primaryDarkOrange,
-              secondlyColor: secondlyDarkOrange);
-        case 'pink':
+              secondlyColor: secondlyDarkOrange,
+              tertiaryColor: tertiaryDarkOrange);
+        case 'Rose':
           return AppearanceContainer(
-              primaryColor: primaryDarkPinck, secondlyColor: secondlyDarkPinck);
-        case 'blue':
+              primaryColor: primaryDarkPinck,
+              secondlyColor: secondlyDarkPinck,
+              tertiaryColor: tertiaryDarkPink);
+        case 'Bleu':
           return AppearanceContainer(
-              primaryColor: primaryDarkBlue, secondlyColor: secondlyDarkBlue);
-        case 'violet':
+              primaryColor: primaryDarkBlue,
+              secondlyColor: secondlyDarkBlue,
+              tertiaryColor: tertiaryDarkBlue);
+        case 'Violet':
           return AppearanceContainer(
               primaryColor: primaryDarkViolet,
-              secondlyColor: secondlyDarkViolet);
-        case 'grey':
+              secondlyColor: secondlyDarkViolet,
+              tertiaryColor: tertiaryDarkViolet);
+        case 'Gris':
           return AppearanceContainer(
-              primaryColor: primaryDarkGrey, secondlyColor: secondlyDarkGrey);
+              primaryColor: primaryDarkGrey,
+              secondlyColor: secondlyDarkGrey,
+              tertiaryColor: tertiaryDarkGrey);
         default:
           return AppearanceContainer(
-              primaryColor: primaryLightGreen,
-              secondlyColor: secondlyLightGreen);
+              primaryColor: primaryDarkGreen,
+              secondlyColor: secondlyDarkGreen,
+              tertiaryColor: tertiaryDarkGreen);
       }
     }
   }

@@ -2,6 +2,7 @@
 
 import 'package:flutter/services.dart';
 
+import '../appAppearance/AppAppearance.dart';
 import 'Settings.dart';
 import '../controller/tacheController/TacheController.dart';
 import 'Recherche.dart';
@@ -15,15 +16,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  AppAppearance app = AppAppearance();
   void changeIndexIconFooter(index) {
     setState(() {
       indexIconFooter = index;
-    });
-  }
-
-  void changeMode() {
-    setState(() {
-      light = !light;
     });
   }
 
@@ -50,9 +46,7 @@ class _HomeState extends State<Home> {
                   Spacer(),
                   TextButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(light
-                            ? Colors.white
-                            : Color.fromARGB(255, 209, 209, 209)),
+                        backgroundColor: MaterialStatePropertyAll(Colors.white),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -67,18 +61,14 @@ class _HomeState extends State<Home> {
                       child: Row(children: [
                         Text('Créer',
                             style: TextStyle(
-                                color: light
-                                    ? Colors.green
-                                    : const Color.fromARGB(255, 40, 77, 41))),
+                                color: app
+                                    .appearance(light, themes)
+                                    .secondlyColor)),
                         Icon(Icons.add_box,
-                            color: light
-                                ? Color.fromARGB(255, 89, 172, 90)
-                                : Color.fromARGB(255, 33, 68, 35))
+                            color: app.appearance(light, themes).primaryColor)
                       ]))
                 ]),
-                backgroundColor: light
-                    ? Color.fromARGB(255, 89, 172, 90)
-                    : const Color.fromARGB(255, 33, 68, 35),
+                backgroundColor: app.appearance(light, themes).primaryColor,
                 titleTextStyle: TextStyle(
                   letterSpacing: 5,
                   color: Colors.white,
@@ -92,10 +82,7 @@ class _HomeState extends State<Home> {
               ),
               bottomNavigationBar: Container(
                 height: 70.0, // Hauteur du footer
-                color: light
-                    ? Colors.green
-                    : Color.fromARGB(
-                        255, 101, 133, 102), // Couleur de fond du footer
+                color: app.appearance(light, themes).secondlyColor,
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   IconButton(

@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, file_names, unused_local_variable, library_private_types_in_public_api, must_be_immutable, prefer_const_constructors_in_immutables
 
+import '../appAppearance/AppAppearance.dart';
 import 'ListDeTache.dart';
 import 'package:flutter/material.dart';
 import '../dataBase/Tache.dart';
@@ -11,6 +12,7 @@ class Recherche extends StatefulWidget {
 
 class _RechercheState extends State<Recherche> {
   List<Tache> tachesCopy = taches;
+  AppAppearance app = AppAppearance();
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -23,16 +25,18 @@ class _RechercheState extends State<Recherche> {
             Expanded(
                 child: SizedBox(
               child: TextField(
-                cursorColor: Colors.green,
+                cursorColor: app.appearance(light, themes).secondlyColor,
                 decoration: InputDecoration(
-                    prefixIconColor: Colors.green,
+                    prefixIconColor:
+                        app.appearance(light, themes).secondlyColor,
                     prefixIcon: Icon(Icons.search),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                      borderSide: BorderSide(
+                          color: app.appearance(light, themes).secondlyColor),
                     ),
                     labelText: 'Rechercher...',
                     labelStyle: TextStyle(
-                      color: Colors.green,
+                      color: app.appearance(light, themes).secondlyColor,
                     )),
                 onChanged: (value) {
                   for (int i = 0; i < tachesCopy.length; i++) {

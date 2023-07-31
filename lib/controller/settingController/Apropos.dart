@@ -26,7 +26,10 @@ class _AproposState extends State<Apropos> {
           fontWeight: FontWeight.w900,
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,12 +70,14 @@ class _AproposState extends State<Apropos> {
                 fontSize: 16,
               ),
             ),
+                SizedBox(height: 16),
             Text(
               '- Marquer les tâches comme terminées/En cours',
               style: TextStyle(
                 fontSize: 16,
               ),
             ),
+                SizedBox(height: 16),
             Text(
               '- Supprimer les tâches',
               style: TextStyle(
@@ -130,20 +135,23 @@ class _AproposState extends State<Apropos> {
               ),
             ),
             SizedBox(height: 16),
-            Text(
-              'Nom de l\'œuvre: ...',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 16),
-            Text(
+                Text(
+                  'Description : Developpeur Full-stack web et mobile',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: 30),
+                Text(
               'Nous espérons que notre application vous aidera à rester organisé et productif !',
               style: TextStyle(
                 fontSize: 16,
+                fontWeight: FontWeight.w600
               ),
             ),
           ],
+        ),
+      ),
         ),
       ),
     );

@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 
+import '../../dataBase/Tache.dart';
+import '../../main.dart';
+
 class Themes extends StatefulWidget {
   @override
   _ThemesState createState() => _ThemesState();
@@ -71,7 +74,11 @@ class _ThemesState extends State<Themes> {
       onTap: () {
         setState(() {
           selectedColor = colorName;
+          themes = colorName;
         });
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: ((context) => MyApp())));
       },
       child: Container(
         width: 100,

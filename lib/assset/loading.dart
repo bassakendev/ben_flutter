@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../appAppearance/AppAppearance.dart';
 import '/dataBase/Tache.dart';
 
 class Loading extends StatefulWidget {
@@ -10,15 +11,11 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+  AppAppearance app = AppAppearance();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        themeMode: light ? ThemeMode.light : ThemeMode.dark,
-        debugShowCheckedModeBanner: false,
-        title: 'Bassakendev',
-        home: Scaffold(
+    return Scaffold(
             body: Center(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -30,12 +27,12 @@ class _LoadingState extends State<Loading> {
                   style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green),
+              color: app.appearance(light, themes).secondlyColor),
                 ),
               ),
               CircularProgressIndicator(
-                color: Colors.green,
+        color: app.appearance(light, themes).secondlyColor,
               ),
-            ]))));
+    ])));
   }
 }
