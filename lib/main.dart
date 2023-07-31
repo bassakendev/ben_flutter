@@ -4,6 +4,7 @@
 import 'assset/loading.dart';
 import 'package:flutter/material.dart';
 import 'assset/Home.dart';
+import 'dataBase/Tache.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: light ? ThemeMode.light : ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         title: 'Bassakendev',
         home: FutureBuilder<void>(

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../dataBase/Tache.dart';
+import '../../../dataBase/Tache.dart';
 
 class ShowTache extends StatefulWidget {
   final String titre;

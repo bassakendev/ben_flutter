@@ -3,7 +3,7 @@
 import 'package:flutter/services.dart';
 
 import 'Settings.dart';
-import '../tacheController/TacheController.dart';
+import '../controller/tacheController/TacheController.dart';
 import 'Recherche.dart';
 import '../dataBase/Tache.dart';
 
@@ -35,89 +35,100 @@ class _HomeState extends State<Home> {
         themeMode: light ? ThemeMode.light : ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         title: 'Bassakendev',
-        home: Scaffold(
-          appBar: AppBar(
-            title: Row(children: [
-              Text('Taches'),
-              Spacer(),
-              TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(light
-                        ? Colors.white
-                        : Color.fromARGB(255, 209, 209, 209)),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TacheController(
-                                opperation: 'create',
-                                titre: '',
-                                description: '',
-                                id: 0)));
-                  },
-                  child: Row(children: [
-                    Text('Créer',
-                        style: TextStyle(
+        home: WillPopScope(
+            onWillPop: () async {
+              // Action à effectuer lorsque l'utilisateur appuie sur la touche physique de retour
+              SystemNavigator.pop();
+              // Retourne false pour empêcher la fermeture de l'application
+              return false;
+            },
+            child: Center(
+                child: Scaffold(
+              appBar: AppBar(
+                title: Row(children: [
+                  Text('Taches'),
+                  Spacer(),
+                  TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(light
+                            ? Colors.white
+                            : Color.fromARGB(255, 209, 209, 209)),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TacheController(
+                                    opperation: 'create',
+                                    titre: '',
+                                    description: '',
+                                    id: 0)));
+                      },
+                      child: Row(children: [
+                        Text('Créer',
+                            style: TextStyle(
+                                color: light
+                                    ? Colors.green
+                                    : const Color.fromARGB(255, 40, 77, 41))),
+                        Icon(Icons.add_box,
                             color: light
-                                ? Colors.green
-                                : const Color.fromARGB(255, 40, 77, 41))),
-                    Icon(Icons.add_box,
-                        color: light
-                            ? Color.fromARGB(255, 89, 172, 90)
-                            : Color.fromARGB(255, 33, 68, 35))
-                  ]))
-            ]),
-            backgroundColor: light
-                ? Color.fromARGB(255, 89, 172, 90)
-                : const Color.fromARGB(255, 33, 68, 35),
-            titleTextStyle: TextStyle(
-              letterSpacing: 5,
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-          body: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: indexIconFooter == 2 ? Settings() : Recherche(),
-          ),
-          bottomNavigationBar: Container(
-            height: 70.0, // Hauteur du footer
-            color: light
-                ? Colors.green
-                : Color.fromARGB(
-                    255, 101, 133, 102), // Couleur de fond du footer
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              IconButton(
-                  color: indexIconFooter == 0 ? Colors.white : Colors.black,
-                  iconSize: 25,
-                  onPressed: () => {
-                        changeIndexIconFooter(0),
-                      },
-                  icon: Icon(Icons.work_history)),
-              SizedBox(
-                width: 50,
+                                ? Color.fromARGB(255, 89, 172, 90)
+                                : Color.fromARGB(255, 33, 68, 35))
+                      ]))
+                ]),
+                backgroundColor: light
+                    ? Color.fromARGB(255, 89, 172, 90)
+                    : const Color.fromARGB(255, 33, 68, 35),
+                titleTextStyle: TextStyle(
+                  letterSpacing: 5,
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
-              IconButton(
-                  color: indexIconFooter == 1 ? Colors.white : Colors.black,
-                  iconSize: 35,
-                  onPressed: () => {
-                        changeIndexIconFooter(1),
-                      },
-                  icon: Icon(Icons.task_alt_rounded)),
-              SizedBox(
-                width: 50,
+              body: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: indexIconFooter == 2 ? Settings() : Recherche(),
               ),
-              IconButton(
-                  iconSize: 35,
-                  onPressed: () => {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Settings()))
-                      },
-                  icon: Icon(Icons.settings))
-            ]),
-          ),
-        ));
+              bottomNavigationBar: Container(
+                height: 70.0, // Hauteur du footer
+                color: light
+                    ? Colors.green
+                    : Color.fromARGB(
+                        255, 101, 133, 102), // Couleur de fond du footer
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  IconButton(
+                      color: indexIconFooter == 0 ? Colors.white : Colors.black,
+                      iconSize: 25,
+                      onPressed: () => {
+                            changeIndexIconFooter(0),
+                          },
+                      icon: Icon(Icons.work_history)),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  IconButton(
+                      color: indexIconFooter == 1 ? Colors.white : Colors.black,
+                      iconSize: 35,
+                      onPressed: () => {
+                            changeIndexIconFooter(1),
+                          },
+                      icon: Icon(Icons.task_alt_rounded)),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  IconButton(
+                      iconSize: 35,
+                      onPressed: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Settings()))
+                          },
+                      icon: Icon(Icons.settings))
+                ]),
+              ),
+            ))));
   }
 }

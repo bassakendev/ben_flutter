@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import '../tacheController/TacheController.dart';
+import '../controller/tacheController/TacheController.dart';
 import '../dataBase/Tache.dart';
 
 class ListDeTache extends StatefulWidget {
