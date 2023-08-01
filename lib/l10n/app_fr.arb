@@ -44,7 +44,7 @@
   "pays": "Pays : {{pays}}",
   "specialite": "Specialité : {{specialite}}",
   "aproposDeLapp": "À propos de l'application",
-  "fonctionnalitésPrincipales": "Fonctionnalité principales",
+  "fonctionnalitesPrincipales": "Fonctionnalité principales",
   "aproposDuDeveloppeur": "À propos du développeur",
   "bienvenue": "Bienvenue dans notre application ToDoList !",
   "detail": "Cette application est une application moderne, qui vous permet de gérer facilement vos tâches quotidiennes. Vous pouvez ajouter, supprimer, modifier, voir et marquer vos tâches comme terminées.",
