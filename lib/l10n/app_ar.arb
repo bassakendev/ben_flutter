@@ -41,7 +41,7 @@
     "russe": "الروسية",
     "nom": "الاسم: {nom}",
     "mail": "البريد الإلكتروني: {mail}",
-    "pays": "البلد: {{pays}}",
+    "pays": "البلد: {pays}",
     "specialite": "التخصص: {specialite}",
     "aproposDeLapp": "حول التطبيق",
     "fonctionnalitesPrincipales": "الميزات الرئيسية",
