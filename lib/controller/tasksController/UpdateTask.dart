@@ -2,40 +2,40 @@
 
 import '../../../assset/Home.dart';
 import 'package:flutter/material.dart';
-import '../../../dataBase/Tache.dart';
 import '../../appAppearance/AppAppearance.dart';
+import '../../dataBase/Task.dart';
 
-class UpdateTache extends StatefulWidget {
+class UpdateTask extends StatefulWidget {
   int id;
-  UpdateTache({required this.id});
+  UpdateTask({required this.id});
   @override
-  _UpdateTacheState createState() => _UpdateTacheState();
+  _UpdateTaskState createState() => _UpdateTaskState();
 }
 
-class _UpdateTacheState extends State<UpdateTache> {
+class _UpdateTaskState extends State<UpdateTask> {
   AppAppearance app = AppAppearance();
 
   final _formkey = GlobalKey<FormState>();
-  List<Tache> tachesCopy = taches;
+  List<Task> tachesCopy = [];
   bool ok1 = false;
   bool ok2 = false;
   bool ok = false;
   int id = 1;
-  late TextEditingController titreController;
+  late TextEditingController titleController;
   late TextEditingController descriptionController;
 
   @override
   void initState() {
     super.initState();
     id = widget.id;
-    titreController = TextEditingController(text: tachesCopy[id].titre);
+    titleController = TextEditingController(text: tachesCopy[id].title);
     descriptionController =
         TextEditingController(text: tachesCopy[id].description);
   }
 
   @override
   void dispose() {
-    titreController.dispose();
+    titleController.dispose();
     descriptionController.dispose();
     super.dispose();
   }
@@ -60,7 +60,7 @@ class _UpdateTacheState extends State<UpdateTache> {
               padding: EdgeInsets.all(15.0),
               child: TextField(
                 style: TextStyle(fontSize: 22.0),
-                controller: titreController,
+                controller: titleController,
                 maxLines: null,
                 cursorColor: app.appearance(light, themes).secondlyColor,
                 decoration: InputDecoration(
@@ -114,12 +114,12 @@ class _UpdateTacheState extends State<UpdateTache> {
                       child: TextButton(
                         onPressed: () {
                           _formkey.currentState?.save();
-                          tachesCopy[id].titre = titreController.text;
+                          tachesCopy[id].title = titleController.text;
                           tachesCopy[id].description =
                               descriptionController.text;
                           setState(() {
                             ok = ok1 = ok2 = false;
-                            titreController.text = '';
+                            titleController.text = '';
                             descriptionController.text = '';
                           });
                           Navigator.pushReplacement(context,

@@ -2,22 +2,22 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../dataBase/Tache.dart';
 import '../../appAppearance/AppAppearance.dart';
+import '../../dataBase/Task.dart';
 
-class ShowTache extends StatefulWidget {
-  final String titre;
+class ShowTask extends StatefulWidget {
+  final String title;
   final String description;
-  ShowTache({required this.titre, required this.description});
+  ShowTask({required this.title, required this.description});
   @override
-  _TacheState createState() => _TacheState();
+  _TaskState createState() => _TaskState();
 }
 
-class _TacheState extends State<ShowTache> {
+class _TaskState extends State<ShowTask> {
   AppAppearance app = AppAppearance();
   @override
   Widget build(BuildContext context) {
-    String titre = widget.titre;
+    String titre = widget.title;
     String description = widget.description;
     return Scaffold(
       appBar: AppBar(

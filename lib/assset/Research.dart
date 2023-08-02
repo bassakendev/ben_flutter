@@ -1,18 +1,36 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, file_names, unused_local_variable, library_private_types_in_public_api, must_be_immutable, prefer_const_constructors_in_immutables
 
 import '../appAppearance/AppAppearance.dart';
-import 'ListDeTache.dart';
+import '../dataBase/dataBaseAction.dart';
+import 'TaskList.dart';
 import 'package:flutter/material.dart';
-import '../dataBase/Tache.dart';
+import '../dataBase/Task.dart';
 
-class Recherche extends StatefulWidget {
+class Research extends StatefulWidget {
   @override
-  _RechercheState createState() => _RechercheState();
+  _ResearchState createState() => _ResearchState();
 }
 
-class _RechercheState extends State<Recherche> {
-  List<Tache> tachesCopy = taches;
+class _ResearchState extends State<Research> {
+  List<Task> tachesCopy = [];
+
   AppAppearance app = AppAppearance();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTasks();
+  }
+
+  Future<void> _loadTasks() async {
+    final database = DatabaseHelper.instance;
+    final loadedTasks = await database.getTasks();
+
+    setState(() {
+      tachesCopy = loadedTasks;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -41,7 +59,7 @@ class _RechercheState extends State<Recherche> {
                 onChanged: (value) {
                   for (int i = 0; i < tachesCopy.length; i++) {
                     if (tachesCopy[i]
-                            .titre
+                            .title
                             .toLowerCase()
                             .contains(value.toLowerCase()) ||
                         tachesCopy[i]
@@ -68,7 +86,7 @@ class _RechercheState extends State<Recherche> {
           ],
         ),
       ),
-      ListDeTache(taches: tachesCopy)
+      TaskList(tasks: tachesCopy)
     ]);
   }
 }

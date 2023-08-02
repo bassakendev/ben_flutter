@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import '../appAppearance/AppAppearance.dart';
 import '../controller/settingController/SettingsController.dart';
-import '../dataBase/Tache.dart';
+import '../dataBase/Task.dart';
 
 class Settings extends StatelessWidget {
   AppAppearance app = AppAppearance();

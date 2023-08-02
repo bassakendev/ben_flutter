@@ -2,22 +2,22 @@
 
 import '../../../assset/Home.dart';
 import 'package:flutter/material.dart';
-import '../../../dataBase/Tache.dart';
 import 'package:intl/intl.dart';
 import 'dart:core';
 
 import '../../appAppearance/AppAppearance.dart';
+import '../../dataBase/Task.dart';
 
-class CreatTache extends StatefulWidget {
+class CreatTask extends StatefulWidget {
   @override
-  _CreatTacheState createState() => _CreatTacheState();
+  _CreatTaskState createState() => _CreatTaskState();
 }
 
-class _CreatTacheState extends State<CreatTache> {
+class _CreatTaskState extends State<CreatTask> {
   AppAppearance app = AppAppearance();
   final _formkey = GlobalKey<FormState>();
-  List<Tache> tachesCopy = taches;
-  String titre = '';
+  List<Task> tachesCopy = [];
+  String title = '';
   String description = '';
   bool ok1 = false;
   bool ok2 = false;
@@ -55,7 +55,7 @@ class _CreatTacheState extends State<CreatTache> {
                   setState(() {
                     ok1 = value.isEmpty ? false : true;
                     ok = (ok1 || ok2) ? true : false;
-                    titre = value;
+                    title = value;
                   });
                 },
               ),
@@ -96,14 +96,14 @@ class _CreatTacheState extends State<CreatTache> {
                       child: TextButton(
                         onPressed: () {
                           _formkey.currentState?.save();
-                          tachesCopy.add(Tache(
-                              titre,
+                          tachesCopy.add(Task(
+                              title,
                               description,
                               DateFormat('MMM d HH:mm')
                                   .format(DateTime.now())));
                           setState(() {
                             ok = ok1 = ok2 = false;
-                            titre = description = '';
+                            title = description = '';
                           });
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (builder) => Home()));

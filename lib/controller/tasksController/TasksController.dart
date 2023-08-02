@@ -2,25 +2,25 @@
 
 import 'package:flutter/material.dart';
 
-import 'CreatTache.dart';
-import 'ShowTache.dart';
-import 'UpdateTache.dart';
+import 'CreatTask.dart';
+import 'ShowTask.dart';
+import 'UpdateTask.dart';
 
-class TacheController extends StatefulWidget {
+class TasksController extends StatefulWidget {
   final String opperation;
   late String titre;
   late String description;
   late int id;
-  TacheController(
+  TasksController(
       {required this.opperation,
       required this.titre,
       required this.description,
       required this.id});
   @override
-  _TacheControllerState createState() => _TacheControllerState();
+  _TasksControllerState createState() => _TasksControllerState();
 }
 
-class _TacheControllerState extends State<TacheController> {
+class _TasksControllerState extends State<TasksController> {
   @override
   Widget build(BuildContext context) {
     String opperation = widget.opperation;
@@ -29,14 +29,14 @@ class _TacheControllerState extends State<TacheController> {
     int id = widget.id;
 
     if (opperation == 'create') {
-      return CreatTache();
+      return CreatTask();
     } else if (opperation == 'show') {
-      return ShowTache(
-        titre: titre,
+      return ShowTask(
+        title: titre,
         description: description,
       );
     } else if (opperation == 'update') {
-      return UpdateTache(id: id);
+      return UpdateTask(id: id);
     } else {
       return const MaterialApp();
     }

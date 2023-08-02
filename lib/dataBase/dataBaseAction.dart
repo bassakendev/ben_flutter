@@ -1,99 +1,95 @@
 // ignore_for_file: file_names
 
-import 'dart:async';
-
-import '/dataBase/Tache.dart';
-import 'package:flutter/widgets.dart';
+import 'package:ben_flutter/dataBase/Task.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DataBaseAction {
-  Database? database;
+class DatabaseHelper {
+  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  Future<void> creatDataBase() async {
-    // Avoid errors caused by flutter upgrade.
-    // Importing 'package:flutter/widgets.dart' is required.
-    WidgetsFlutterBinding.ensureInitialized();
-    // Open the database and store the reference.
-    database = await openDatabase(
-      // Set the path to the database. Note: Using the `join` function from the
-      // `path` package is best practice to ensure the path is correctly
-      // constructed for each platform.
-      join(await getDatabasesPath(), 'task_database.db'),
-      // When the database is first created, create a table to store tasks.
-      onCreate: (db, version) {
-        // Run the CREATE TABLE statement on the database.
-        return db.execute(
-          'CREATE TABLE taches(id INTEGER PRIMARY KEY AUTOINCREMENT, titre TEXT, description TEXT, createdAt TEXT)',
-        );
-      },
-      // Set the version. This executes the onCreate function and provides a
-      // path to perform database upgrades and downgrades.
+  static Database? _database;
+
+  DatabaseHelper._privateConstructor();
+
+  Future<Database> get database async {
+    if (_database != null) {
+      return _database!;
+    }
+
+    _database = await _initDatabase();
+    return _database!;
+  }
+
+  Future<Database> _initDatabase() async {
+    final databasePath = await getDatabasesPath();
+    final path = join(databasePath, 'tasks.db');
+
+    return await openDatabase(
+      path,
       version: 1,
+      onCreate: _createDatabase,
     );
   }
 
-  // Define a function that inserts tasks into the database
-  Future<void> insertTache(Tache tache) async {
-    // Get a reference to the database.
-    final db = database;
+  Future<void> _createDatabase(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE tasks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        description TEXT,
+        createdAt TEXT
+      )
+    ''');
+  }
 
-    // Insert the Task into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same task is inserted twice.
-    //
-    // In this case, replace any previous data.
-    await db!.insert(
-      'taches',
-      tache.toMap(),
+  Future<List<Task>> getTasks() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('tasks');
+
+    return List.generate(maps.length, (index) {
+      return Task(
+        maps[index]['title'],
+        maps[index]['description'],
+        maps[index]['createdAt'],
+      );
+    });
+  }
+
+  Future<void> insertTask(Task task) async {
+    final db = await database;
+
+    await db.insert(
+      'tasks',
+      {
+        'title': task.title,
+        'description': task.description,
+        'createdAt': task.createdAt,
+      },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  // A method that retrieves all the tasks from the tasks table.
-  Future<List<Tache>> allTaches() async {
-    // Get a reference to the database.
-    final db = database;
+  Future<void> updateTask(Task task) async {
+    final db = await database;
 
-    // Query the table for all The tasks.
-    final List<Map<String, dynamic>> maps = await db!.query('taches');
-
-    // Convert the List<Map<String, dynamic> into a List<task>.
-    return List.generate(maps.length, (i) {
-      return Tache(
-          maps[i]['titre'], maps[i]['description'], maps[i]['createdAt']);
-    });
-  }
-
-  Future<void> updateTache(int id, String titre, String description) async {
-    // Get a reference to the database.
-    final db = database;
-    
-    // Create a map of the updated values.
-    final updatedValues = {
-      'titre': titre,
-      'description': description,
-    };
-    // Update the given task.
-    await db!.update(
-      'taches',
-      updatedValues,
-      // Ensure that the task has a matching id.
+    await db.update(
+      'tasks',
+      {
+        'title': task.title,
+        'description': task.description,
+        'date': task.createdAt,
+      },
       where: 'id = ?',
-      // Pass the task's id as a whereArg to prevent SQL injection.
-      whereArgs: [id],
+      whereArgs: [task.id],
     );
   }
 
-  Future<void> deleteTache(int id) async {
-    // Get a reference to the database.
-    final db = database;
+  Future<void> deleteTask(int id) async {
+    final db = await database;
 
-    // Remove the task from the database.
-    await db!.delete(
-      'taches',
-      // Use a `where` clause to delete a specific task.
+    await db.delete(
+      'tasks',
       where: 'id = ?',
-      // Pass the task's id as a whereArg to prevent SQL injection.
       whereArgs: [id],
     );
   }

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../appAppearance/AppAppearance.dart';
-import '/dataBase/Tache.dart';
+import '../dataBase/Task.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -16,23 +16,22 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            body: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-              Padding(
-                padding: EdgeInsets.all(30),
-                child: Text(
-                  'Todo-List',
-                  style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
+        body: Center(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Padding(
+        padding: EdgeInsets.all(30),
+        child: Text(
+          'Todo-List',
+          style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
               color: app.appearance(light, themes).secondlyColor),
-                ),
-              ),
-              CircularProgressIndicator(
+        ),
+      ),
+      CircularProgressIndicator(
         color: app.appearance(light, themes).secondlyColor,
-              ),
+      ),
     ])));
   }
 }
