@@ -48,6 +48,7 @@ class _UpdateTaskState extends State<UpdateTask> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(AppLocalizations.of(context)!.modifier),
           backgroundColor: app.appearance(light, themes).primaryColor,
           titleTextStyle: TextStyle(
@@ -122,11 +123,12 @@ class _UpdateTaskState extends State<UpdateTask> {
                           setState(() {
                             ok = ok1 = ok2 = false;
                             Future<void> fast() async {
+                              String lang = await StoragesUtils.getLang();
                               tasksCopy[id].title = titleController.text;
                               tasksCopy[id].description =
                                   descriptionController.text;
                               tasksCopy[id].createdAt =
-                                  DateFormat('MMM d HH:mm')
+                                  DateFormat('MMM d HH:mm', lang)
                                       .format(DateTime.now());
                               await StoragesUtils.saveTasks(tasksCopy);
                               tasks = await StoragesUtils.getTasks();

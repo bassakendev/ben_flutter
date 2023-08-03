@@ -29,6 +29,7 @@ class _CreatTaskState extends State<CreatTask> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(AppLocalizations.of(context)!.nouvelleTache),
           backgroundColor: app.appearance(light, themes).primaryColor,
           titleTextStyle: TextStyle(
@@ -102,10 +103,11 @@ class _CreatTaskState extends State<CreatTask> {
 
                           setState(() {
                             Future<void> fast() async {
+                              String lang = await StoragesUtils.getLang();
                               tasksCopy.add(Task(
                                   title: title,
                                   description: description,
-                                  createdAt: DateFormat('MMM d HH:mm')
+                                  createdAt: DateFormat("MMM d HH:mm", lang)
                                       .format(DateTime.now()),
                                   statut: 'false'));
                               await StoragesUtils.saveTasks(tasksCopy);
@@ -114,7 +116,6 @@ class _CreatTaskState extends State<CreatTask> {
 
                             fast();
                             ok = ok1 = ok2 = false;
-                            title = description = '';
                           });
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (builder) => Home()));

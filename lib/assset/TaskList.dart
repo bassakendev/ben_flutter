@@ -158,7 +158,7 @@ class _TaskListState extends State<TaskList> {
                                             opperation: 'update',
                                             titre: task.title,
                                             description: task.description,
-                                            id: task.getId())));
+                                            id: i)));
                               },
                               child: Icon(Icons.edit,
                                   color: light ? Colors.black : Colors.white))

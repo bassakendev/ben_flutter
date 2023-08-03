@@ -20,6 +20,7 @@ class _ThemesState extends State<Themes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: app.appearance(light, themes).primaryColor,
         title: Text(AppLocalizations.of(context)!.theme),
       ),

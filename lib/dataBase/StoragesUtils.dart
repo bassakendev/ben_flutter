@@ -11,7 +11,7 @@ class StoragesUtils {
 
   static const String THEME_KEY = 'theme';
   static const String MODE_KEY = 'mode';
-  static const String LANG_KEY = 'mode';
+  static const String LANG_KEY = 'lang';
 
   static Future<int> getTheme() async {
     final SharedPreferences prefs = await _prefs;

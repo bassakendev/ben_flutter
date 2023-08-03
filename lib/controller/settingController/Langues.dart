@@ -16,12 +16,22 @@ class Langues extends StatefulWidget {
 
 class _LanguesState extends State<Langues> {
   AppAppearance app = AppAppearance();
+
   String selectedLanguage = '';
+  void getFastLang() async {
+    final loadedLang = await StoragesUtils.getLang();
+
+    setState(() {
+      selectedLanguage = loadedLang;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    getFastLang();
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: app.appearance(light, themes).primaryColor,
         title: Text(AppLocalizations.of(context)!.langue),
       ),
@@ -64,7 +74,7 @@ class _LanguesState extends State<Langues> {
               ),
               child: Center(
                 child: Text(
-                  selectedLanguage,
+                  getLangName(selectedLanguage, context),
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
@@ -79,10 +89,9 @@ class _LanguesState extends State<Langues> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          selectedLanguage = languageName;
+          selectedLanguage = languageCode;
           Future<void> fast() async {
             await StoragesUtils.setLang(languageCode);
-            lang = await StoragesUtils.getLang();
           }
 
           fast();
@@ -94,7 +103,7 @@ class _LanguesState extends State<Langues> {
         width: 100,
         height: 100,
         decoration: BoxDecoration(
-          color: selectedLanguage == languageName
+          color: selectedLanguage == languageCode
               ? app.appearance(light, themes).secondlyColor
               : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
@@ -115,5 +124,28 @@ class _LanguesState extends State<Langues> {
         ),
       ),
     );
+  }
+}
+
+String getLangName(String langCode, context) {
+  switch (langCode) {
+    case 'fr':
+      return AppLocalizations.of(context)!.francais;
+    case 'en':
+      return AppLocalizations.of(context)!.anglais;
+    case 'pt':
+      return AppLocalizations.of(context)!.portugais;
+    case 'ar':
+      return AppLocalizations.of(context)!.arabe;
+    case 'ru':
+      return AppLocalizations.of(context)!.russe;
+    case 'es':
+      return AppLocalizations.of(context)!.espagnol;
+    case 'it':
+      return AppLocalizations.of(context)!.italien;
+    case 'de':
+      return AppLocalizations.of(context)!.allemand;
+    default:
+      return AppLocalizations.of(context)!.anglais;
   }
 }

@@ -21,6 +21,7 @@ class _TaskState extends State<ShowTask> {
     String description = widget.description;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(titre),
         backgroundColor: app.appearance(light, themes).primaryColor,
         titleTextStyle: TextStyle(

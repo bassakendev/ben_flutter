@@ -24,7 +24,8 @@ class _MyAppState extends State<MyApp> {
     await Future.delayed(Duration(seconds: 5));
   }
 
-  Locale _locale = Locale(lang);
+  Locale _locale = Locale('en');
+  String lg = '';
   @override
   void initState() {
     super.initState();
@@ -40,7 +41,8 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       light = loadedMode;
       themes = loadedTheme;
-      lang = loadedLang;
+      _locale = Locale(loadedLang);
+      lg = loadedLang;
     });
   }
 
@@ -52,15 +54,9 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void changeLanguage(Locale newLocale) {
-    setState(() {
-      _locale = newLocale;
-    });
-    Intl.defaultLocale = newLocale.languageCode;
-  }
-
   @override
   Widget build(BuildContext context) {
+    Intl.defaultLocale = lg;
     return MaterialApp(
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),

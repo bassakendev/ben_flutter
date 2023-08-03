@@ -22,6 +22,7 @@ class _ModeState extends State<Mode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: app.appearance(light, themes).primaryColor,
         title: Text(AppLocalizations.of(context)!.mode),
       ),

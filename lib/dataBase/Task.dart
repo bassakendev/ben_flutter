@@ -74,4 +74,3 @@ List<Task> tasks = [];
 int indexIconFooter = 0;
 bool light = true;
 int themes = 0;
-String lang = '';

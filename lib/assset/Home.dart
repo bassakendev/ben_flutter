@@ -36,6 +36,7 @@ class _HomeState extends State<Home> {
         child: Center(
             child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Row(children: [
               Text(AppLocalizations.of(context)!.taches),
               Spacer(),
