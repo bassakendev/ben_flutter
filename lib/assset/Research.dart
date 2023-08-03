@@ -6,8 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'TaskList.dart';
 import 'package:flutter/material.dart';
 import '../dataBase/Task.dart';
-import '../dataBase/DataBaseAction.dart';
-
 
 class Research extends StatefulWidget {
   @override
@@ -15,20 +13,24 @@ class Research extends StatefulWidget {
 }
 
 class _ResearchState extends State<Research> {
-  @override
-  void initState() {
-    super.initState();
-    _loadTasks();
-  }
+   
+  //  Future<void> _loadUtils() async {
+  //   final loadedMode = await StoragesUtils.getTasks();
 
-  Future<void> _loadTasks() async {
-    final database = DatabaseHelper.instance;
-    final loadedTasks = await database.getTasks();
+  //   setState(() {
+  //     light = loadedMode;
+  //     themes = loadedTheme;
+  //   });
+  // }
 
-    setState(() {
-      tasks = loadedTasks;
-    });
-  }
+  //  @override
+  // void initState() {
+  //   super.initState();
+  //   _loadUtils();
+  //   _loadTasks();
+  // }
+
+  
   List<Task> tasksCopy = tasks;
 
   AppAppearance app = AppAppearance();

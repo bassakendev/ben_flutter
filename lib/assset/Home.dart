@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../appAppearance/AppAppearance.dart';
-import '../dataBase/DataBaseAction.dart';
 import '../dataBase/Task.dart';
 import 'Settings.dart';
 import '../controller/tasksController/TasksController.dart';
@@ -23,21 +22,6 @@ class _HomeState extends State<Home> {
   void changeIndexIconFooter(index) {
     setState(() {
       indexIconFooter = index;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTasks();
-  }
-
-  Future<void> _loadTasks() async {
-    final database = DatabaseHelper.instance;
-    final loadedTasks = await database.getTasks();
-
-    setState(() {
-      tasks = loadedTasks;
     });
   }
   @override

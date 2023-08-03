@@ -1,11 +1,11 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, file_names, lendsTasksrary_private_types_in_public_api, unused_element, prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, unrelated_type_equality_checks
 
+import 'package:ben_flutter/dataBase/StoragesUtils.dart';
 import 'package:flutter/material.dart';
 import '../appAppearance/AppAppearance.dart';
 import '../controller/tasksController/TasksController.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../dataBase/DataBaseAction.dart';
 import '../dataBase/Task.dart';
 
 class TaskList extends StatefulWidget {
@@ -28,7 +28,7 @@ class _TaskListState extends State<TaskList> {
 
   @override
   Widget build(BuildContext context) {
-    tasksCopy.sort((a, b) => b.getId()!.compareTo(a.getId()!));
+    tasksCopy.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     return Expanded(
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -36,21 +36,21 @@ class _TaskListState extends State<TaskList> {
           itemCount: indexIconFooter == 0
               ? tasksCopy
                   .where((task) =>
-                      task.getFind() == true && task.getStatut() == false)
+                      task.getFind() == true && task.statut == 'false')
                   .length
               : tasksCopy
-                  .where((task) =>
-                      task.getStatut() == true && task.getFind() == true)
+                  .where(
+                      (task) => task.statut == 'true' && task.getFind() == true)
                   .length,
           itemBuilder: (context, i) {
             Task task = indexIconFooter == 0
                 ? tasksCopy
                     .where((task) =>
-                        task.getFind() == true && task.getStatut() == false)
+                        task.getFind() == true && task.statut == 'false')
                     .toList()[i]
                 : tasksCopy
                     .where((task) =>
-                        task.getStatut() == true && task.getFind() == true)
+                        task.statut == 'true' && task.getFind() == true)
                     .toList()[i];
             return Container(
               margin: EdgeInsets.all(10),
@@ -66,7 +66,6 @@ class _TaskListState extends State<TaskList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        // task.titre,
                         task.title,
                         style: TextStyle(
                           color: app.appearance(light, themes).secondlyColor,
@@ -86,15 +85,28 @@ class _TaskListState extends State<TaskList> {
                       ),
                       SizedBox(height: 2),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextButton(
                             onPressed: () {
                               setState(() {
-                                task.setStatut();
+                                task.statut =
+                                    task.statut == 'true' ? 'false' : 'true';
+                                Future<void> fast() async {
+                                  for (int i = 0; i < tasksCopy.length; i++) {
+                                    if (tasksCopy[i].id == task.getId()) {
+                                      tasksCopy[i].statut = task.statut;
+                                      break;
+                                    }
+                                  }
+                                  await StoragesUtils.saveTasks(tasksCopy);
+                                  tasks = await StoragesUtils.getTasks();
+                                }
+
+                                fast();
                               });
                             },
-                            child: task.getStatut()
+                            child: task.statut == 'true'
                                 ? Icon(Icons.check,
                                     color: app
                                         .appearance(light, themes)
@@ -107,8 +119,14 @@ class _TaskListState extends State<TaskList> {
                           TextButton(
                             onPressed: () {
                               setState(() {
-                                final database = DatabaseHelper.instance;
-                                database.deleteTask(task.id!);
+                                Future<void> fast() async {
+                                  tasksCopy.removeWhere((element) =>
+                                      element.getId() == task.getId());
+                                  await StoragesUtils.saveTasks(tasksCopy);
+                                  tasks = await StoragesUtils.getTasks();
+                                }
+
+                                fast();
                               });
                             },
                             child: Icon(
@@ -140,7 +158,7 @@ class _TaskListState extends State<TaskList> {
                                             opperation: 'update',
                                             titre: task.title,
                                             description: task.description,
-                                            id: tasksCopy.length - (1 + i))));
+                                            id: task.getId())));
                               },
                               child: Icon(Icons.edit,
                                   color: light ? Colors.black : Colors.white))

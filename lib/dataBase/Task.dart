@@ -8,29 +8,23 @@ class Task {
   String title;
   String description;
   String createdAt;
-  int? id;
-  bool statut = false;
+  int id = 0;
+  String statut;
   bool find = true;
 
   Task(
-      {this.id,
-      required this.title,
+      {
+    required this.title,
       required this.description,
-      required this.createdAt}) {
+    required this.createdAt,
+    required this.statut,
+  }) {
     lastId++;
     id = lastId;
   }
 
-  int? getId() {
+  int getId() {
     return id;
-  }
-
-  bool getStatut() {
-    return statut;
-  }
-
-  void setStatut() {
-    statut = !statut;
   }
 
   bool getFind() {
@@ -41,15 +35,21 @@ class Task {
     this.find = find;
   }
 
-  Map<String, dynamic> toMap() {
-    return {'title': title, 'description': description, 'createdAt': createdAt};
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'createdAt': createdAt,
+      'statut': statut
+    };
   }
 
-  // Implement toString to make it easier to see information about
-  // each dog when using the print statement.
-  @override
-  String toString() {
-    return 'Tache{title: $title, description: $description}';
+  factory Task.fromJson(Map<String, dynamic> json) {
+    return Task(
+        title: json['title'],
+        description: json['description'],
+        createdAt: json['createdAt'],
+        statut: json['statut']);
   }
 }
 
@@ -74,4 +74,4 @@ List<Task> tasks = [];
 int indexIconFooter = 0;
 bool light = true;
 int themes = 0;
-int lang = 0;
+String lang = '';

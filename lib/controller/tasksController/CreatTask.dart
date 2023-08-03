@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, must_be_immutable, file_names, library_private_types_in_public_api, unused_local_variable
 
+import 'package:ben_flutter/dataBase/StoragesUtils.dart';
+
 import '../../../assset/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:core';
 
 import '../../appAppearance/AppAppearance.dart';
-import '../../dataBase/DataBaseAction.dart';
 import '../../dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,6 +17,7 @@ class CreatTask extends StatefulWidget {
 }
 
 class _CreatTaskState extends State<CreatTask> {
+  List<Task> tasksCopy = tasks;
   AppAppearance app = AppAppearance();
   final _formkey = GlobalKey<FormState>();
   String title = '';
@@ -97,13 +99,20 @@ class _CreatTaskState extends State<CreatTask> {
                       child: TextButton(
                         onPressed: () {
                           _formkey.currentState?.save();
-                          final database = DatabaseHelper.instance;
-                          database.insertTask(Task(
-                              title: title,
-                              description: description,
-                              createdAt: DateFormat('MMM d HH:mm')
-                                  .format(DateTime.now())));
+
                           setState(() {
+                            Future<void> fast() async {
+                              tasksCopy.add(Task(
+                                  title: title,
+                                  description: description,
+                                  createdAt: DateFormat('MMM d HH:mm')
+                                      .format(DateTime.now()),
+                                  statut: 'false'));
+                              await StoragesUtils.saveTasks(tasksCopy);
+                              tasks = await StoragesUtils.getTasks();
+                            }
+
+                            fast();
                             ok = ok1 = ok2 = false;
                             title = description = '';
                           });

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../assset/Home.dart';
 import 'package:flutter/material.dart';
 import '../../appAppearance/AppAppearance.dart';
-import '../../dataBase/DataBaseAction.dart';
+import '../../dataBase/StoragesUtils.dart';
 import '../../dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -118,16 +118,21 @@ class _UpdateTaskState extends State<UpdateTask> {
                       child: TextButton(
                         onPressed: () {
                           _formkey.currentState?.save();
-                          
+
                           setState(() {
                             ok = ok1 = ok2 = false;
-                            final database = DatabaseHelper.instance;
-                            database.updateTask(Task(
-                                id: tasksCopy[id].id,
-                                title: titleController.text,
-                                description: descriptionController.text,
-                                createdAt: DateFormat('MMM d HH:mm')
-                                    .format(DateTime.now())));
+                            Future<void> fast() async {
+                              tasksCopy[id].title = titleController.text;
+                              tasksCopy[id].description =
+                                  descriptionController.text;
+                              tasksCopy[id].createdAt =
+                                  DateFormat('MMM d HH:mm')
+                                      .format(DateTime.now());
+                              await StoragesUtils.saveTasks(tasksCopy);
+                              tasks = await StoragesUtils.getTasks();
+                            }
+
+                            fast();
                           });
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (builder) => Home()));

@@ -3,12 +3,13 @@
 import 'package:ben_flutter/dataBase/StoragesUtils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 
 import 'assset/loading.dart';
 import 'package:flutter/material.dart';
 import 'assset/Home.dart';
-import 'dataBase/DataBaseAction.dart';
 import 'dataBase/Task.dart';
+import 'l10n/L10n.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     await Future.delayed(Duration(seconds: 5));
   }
 
+  Locale _locale = Locale(lang);
   @override
   void initState() {
     super.initState();
@@ -33,20 +35,28 @@ class _MyAppState extends State<MyApp> {
   Future<void> _loadUtils() async {
     final loadedMode = await StoragesUtils.getMode();
     final loadedTheme = await StoragesUtils.getTheme();
+    final loadedLang = await StoragesUtils.getLang();
 
     setState(() {
       light = loadedMode;
       themes = loadedTheme;
+      lang = loadedLang;
     });
   }
 
   Future<void> _loadTasks() async {
-    final database = DatabaseHelper.instance;
-    final loadedTasks = await database.getTasks();
+    final loadedTasks = await StoragesUtils.getTasks();
 
     setState(() {
       tasks = loadedTasks;
     });
+  }
+
+  void changeLanguage(Locale newLocale) {
+    setState(() {
+      _locale = newLocale;
+    });
+    Intl.defaultLocale = newLocale.languageCode;
   }
 
   @override
@@ -63,16 +73,8 @@ class _MyAppState extends State<MyApp> {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: [
-          Locale('fr'),
-          Locale('en'),
-          Locale('de'),
-          Locale('es'),
-          Locale('pt'),
-          Locale('it'),
-          Locale('ar'),
-          Locale('ru'),
-        ],
+        supportedLocales: L10n.all(),
+        locale: _locale,
         home: FutureBuilder<void>(
             future: _loadResources(),
             builder: (BuildContext context, AsyncSnapshot<void> snapshot) {

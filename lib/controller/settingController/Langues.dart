@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, file_names
 
+import 'package:ben_flutter/dataBase/StoragesUtils.dart';
 import 'package:flutter/material.dart';
 
 import '../../appAppearance/AppAppearance.dart';
 import '../../dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../main.dart';
 
 class Langues extends StatefulWidget {
   @override
@@ -77,7 +80,15 @@ class _LanguesState extends State<Langues> {
       onTap: () {
         setState(() {
           selectedLanguage = languageName;
+          Future<void> fast() async {
+            await StoragesUtils.setLang(languageCode);
+            lang = await StoragesUtils.getLang();
+          }
+
+          fast();
         });
+        Navigator.push(
+            context, MaterialPageRoute(builder: ((context) => MyApp())));
       },
       child: Container(
         width: 100,

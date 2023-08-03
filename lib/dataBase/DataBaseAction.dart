@@ -42,19 +42,19 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<List<Task>> getTasks() async {
-    final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('tasks');
+  // Future<List<Task>> getTasks() async {
+  //   final db = await database;
+  //   final List<Map<String, dynamic>> maps = await db.query('tasks');
 
-    return List.generate(maps.length, (index) {
-      return Task(
-        id: maps[index]['id'],
-        title: maps[index]['title'],
-        description: maps[index]['description'],
-        createdAt: maps[index]['createdAt'],
-      );
-    });
-  }
+  //   return List.generate(maps.length, (index) {
+  //     return Task(
+  //       id: maps[index]['id'],
+  //       title: maps[index]['title'],
+  //       description: maps[index]['description'],
+  //       createdAt: maps[index]['createdAt'],
+  //     );
+  //   });
+  // }
 
   Future<void> insertTask(Task task) async {
     final db = await database;
