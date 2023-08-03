@@ -3,8 +3,8 @@
     "enAttente": "In attesa...",
     "creer": "Creare",
     "rechercher": "Cercare",
-    "titre": "Titolo",
-    "descritpion": "Descrizione",
+    "titre": "Titolo...",
+    "descritpion": "Descrizione...",
     "modifier": "Modificare",
     "nouvelleTache": "Nuova attività",
     "mode": "Modalità",
@@ -54,5 +54,6 @@
     "fonction4": "- Passa tra la modalità Notte e Giorno",
     "fonction5": "- Scegli un tema tra diversi colori popolari, secondo le tue preferenze",
     "fonction6": "- Scegli la tua lingua preferita tra diverse lingue comunemente utilizzate",
-    "aurevoir": "Speriamo che la nostra applicazione ti aiuti a rimanere organizzato e produttivo!"
+    "aurevoir": "Speriamo che la nostra applicazione ti aiuti a rimanere organizzato e produttivo!",
+    "enregistrer": "Salva"
 }

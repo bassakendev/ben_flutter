@@ -3,8 +3,8 @@
     "enAttente": "Ausstehend...",
     "creer": "Erstellen",
     "rechercher": "Suche",
-    "titre": "Titel",
-    "descritpion": "Beschreibung",
+    "titre": "Titel...",
+    "descritpion": "Beschreibung...",
     "modifier": "Bearbeiten",
     "nouvelleTache": "Neue Aufgabe",
     "mode": "Modus",
@@ -54,5 +54,6 @@
     "fonction4": "- Zwischen Nacht- und Tagmodus wechseln",
     "fonction5": "- Wählen Sie ein Thema aus mehreren beliebten Farben nach Ihren Vorlieben",
     "fonction6": "- Wählen Sie Ihre bevorzugte Sprache aus mehreren gebräuchlichen Sprachen",
-    "aurevoir": "Wir hoffen, dass unsere Anwendung Ihnen hilft, organisiert und produktiv zu bleiben!"
+    "aurevoir": "Wir hoffen, dass unsere Anwendung Ihnen hilft, organisiert und produktiv zu bleiben!",
+    "enregistrer": "Speichern"
 }

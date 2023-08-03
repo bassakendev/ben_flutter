@@ -1,5 +1,4 @@
 // ignore_for_file: file_names, unused_local_variable
-import 'package:intl/intl.dart';
 import 'dart:core';
 
 DateTime now = DateTime.now();
@@ -9,16 +8,20 @@ class Task {
   String title;
   String description;
   String createdAt;
-  int id = 0;
+  int? id;
   bool statut = false;
   bool find = true;
 
-  Task(this.title, this.description, this.createdAt) {
+  Task(
+      {this.id,
+      required this.title,
+      required this.description,
+      required this.createdAt}) {
     lastId++;
     id = lastId;
   }
 
-  int getId() {
+  int? getId() {
     return id;
   }
 
@@ -50,7 +53,7 @@ class Task {
   }
 }
 
-// List<Tache> taches =
+List<Task> tasks = [];
 // [
 //   Tache('Vaccances', 'Je doit aller à Dubai avec ma famille l\'hiver prochain',
 //       DateFormat('MMM d HH:mm').format(now)),
@@ -70,4 +73,5 @@ class Task {
 
 int indexIconFooter = 0;
 bool light = true;
-String themes = '';
+int themes = 0;
+int lang = 0;

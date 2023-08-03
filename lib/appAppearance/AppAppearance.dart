@@ -14,7 +14,7 @@ class AppAppearance {
 
   late Color primaryLightYellow = const Color.fromARGB(255, 230, 217, 100);
   late Color primaryDarkYellow = const Color.fromARGB(255, 133, 124, 45);
-  late Color secondlyLightYellow = const Color.fromARGB(255, 160, 145, 7);
+  late Color secondlyLightYellow = Color.fromARGB(255, 221, 203, 37);
   late Color secondlyDarkYellow = const Color.fromARGB(255, 184, 171, 53);
   late Color tertiaryLightYellow = const Color.fromARGB(255, 255, 253, 197);
   late Color tertiaryDarkYellow = const Color.fromARGB(255, 156, 158, 57);
@@ -61,45 +61,45 @@ class AppAppearance {
   late Color tertiaryLightGrey = const Color.fromARGB(255, 233, 230, 230);
   late Color tertiaryDarkGrey = const Color.fromARGB(255, 116, 114, 114);
 
-  AppearanceContainer appearance(bool light, String themes) {
+  AppearanceContainer appearance(bool light, int themes) {
     if (light) {
       switch (themes) {
-        case 'Vert':
+        case 0:
           return AppearanceContainer(
               primaryColor: primaryLightGreen,
               secondlyColor: secondlyLightGreen,
               tertiaryColor: tertiaryLightGreen);
-        case 'Jaune':
+        case 1:
           return AppearanceContainer(
               primaryColor: primaryLightYellow,
               secondlyColor: secondlyLightYellow,
               tertiaryColor: tertiaryLightGreen);
-        case 'Rouge':
+        case 2:
           return AppearanceContainer(
               primaryColor: primaryLightRed,
               secondlyColor: secondlyLightRed,
               tertiaryColor: tertiaryLightRed);
-        case 'Orange':
+        case 3:
           return AppearanceContainer(
               primaryColor: primaryLightOrange,
               secondlyColor: secondlyLightOrange,
               tertiaryColor: tertiaryLightOrange);
-        case 'Rose':
+        case 4:
           return AppearanceContainer(
               primaryColor: primaryLightPinck,
               secondlyColor: secondlyLightPinck,
               tertiaryColor: tertiaryLightPink);
-        case 'Bleu':
+        case 7:
           return AppearanceContainer(
               primaryColor: primaryLightBlue,
               secondlyColor: secondlyLightBlue,
               tertiaryColor: tertiaryLightBlue);
-        case 'Violet':
+        case 5:
           return AppearanceContainer(
               primaryColor: primaryLightViolet,
               secondlyColor: secondlyLightViolet,
               tertiaryColor: tertiaryLightViolet);
-        case 'Gris':
+        case 6:
           return AppearanceContainer(
               primaryColor: primaryLightGrey,
               secondlyColor: secondlyLightGrey,
@@ -112,42 +112,42 @@ class AppAppearance {
       }
     } else {
       switch (themes) {
-        case 'Vert':
+        case 0:
           return AppearanceContainer(
               primaryColor: primaryDarkGreen,
               secondlyColor: secondlyDarkGreen,
               tertiaryColor: tertiaryDarkGreen);
-        case 'Jaune':
+        case 1:
           return AppearanceContainer(
               primaryColor: primaryDarkYellow,
               secondlyColor: secondlyDarkYellow,
               tertiaryColor: tertiaryDarkYellow);
-        case 'Rouge':
+        case 2:
           return AppearanceContainer(
               primaryColor: primaryDarkRed,
               secondlyColor: secondlyDarkRed,
               tertiaryColor: tertiaryDarkRed);
-        case 'Orange':
+        case 3:
           return AppearanceContainer(
               primaryColor: primaryDarkOrange,
               secondlyColor: secondlyDarkOrange,
               tertiaryColor: tertiaryDarkOrange);
-        case 'Rose':
+        case 4:
           return AppearanceContainer(
               primaryColor: primaryDarkPinck,
               secondlyColor: secondlyDarkPinck,
               tertiaryColor: tertiaryDarkPink);
-        case 'Bleu':
+        case 7:
           return AppearanceContainer(
               primaryColor: primaryDarkBlue,
               secondlyColor: secondlyDarkBlue,
               tertiaryColor: tertiaryDarkBlue);
-        case 'Violet':
+        case 5:
           return AppearanceContainer(
               primaryColor: primaryDarkViolet,
               secondlyColor: secondlyDarkViolet,
               tertiaryColor: tertiaryDarkViolet);
-        case 'Gris':
+        case 6:
           return AppearanceContainer(
               primaryColor: primaryDarkGrey,
               secondlyColor: secondlyDarkGrey,

@@ -3,8 +3,8 @@
     "enAttente": "Pending...",
     "creer": "Create",
     "rechercher": "Search",
-    "titre": "Title",
-    "descritpion": "Description",
+    "titre": "Title...",
+    "descritpion": "Description...",
     "modifier": "Edit",
     "nouvelleTache": "New Task",
     "mode": "Mode",
@@ -54,6 +54,7 @@
     "fonction4": "- Switch between Night and Day mode",
     "fonction5": "- Choose a Theme from several popular colors, according to your preference",
     "fonction6": "- Choose your preferred language from several commonly used languages",
-    "Aurevoir": "We hope our application helps you stay organized and productive!"
+    "aurevoir": "We hope our application helps you stay organized and productive!",
+    "enregistrer": "Save"
   }
   

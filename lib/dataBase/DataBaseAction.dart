@@ -48,9 +48,10 @@ class DatabaseHelper {
 
     return List.generate(maps.length, (index) {
       return Task(
-        maps[index]['title'],
-        maps[index]['description'],
-        maps[index]['createdAt'],
+        id: maps[index]['id'],
+        title: maps[index]['title'],
+        description: maps[index]['description'],
+        createdAt: maps[index]['createdAt'],
       );
     });
   }
@@ -77,7 +78,7 @@ class DatabaseHelper {
       {
         'title': task.title,
         'description': task.description,
-        'date': task.createdAt,
+        'createdAt': task.createdAt,
       },
       where: 'id = ?',
       whereArgs: [task.id],

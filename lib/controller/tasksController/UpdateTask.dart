@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, must_be_immutable, file_names, library_private_types_in_public_api, unused_local_variable
 
+import 'package:intl/intl.dart';
+
 import '../../../assset/Home.dart';
 import 'package:flutter/material.dart';
 import '../../appAppearance/AppAppearance.dart';
+import '../../dataBase/DataBaseAction.dart';
 import '../../dataBase/Task.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdateTask extends StatefulWidget {
   int id;
@@ -16,7 +20,7 @@ class _UpdateTaskState extends State<UpdateTask> {
   AppAppearance app = AppAppearance();
 
   final _formkey = GlobalKey<FormState>();
-  List<Task> tachesCopy = [];
+  List<Task> tasksCopy = tasks;
   bool ok1 = false;
   bool ok2 = false;
   bool ok = false;
@@ -28,9 +32,9 @@ class _UpdateTaskState extends State<UpdateTask> {
   void initState() {
     super.initState();
     id = widget.id;
-    titleController = TextEditingController(text: tachesCopy[id].title);
+    titleController = TextEditingController(text: tasksCopy[id].title);
     descriptionController =
-        TextEditingController(text: tachesCopy[id].description);
+        TextEditingController(text: tasksCopy[id].description);
   }
 
   @override
@@ -44,7 +48,7 @@ class _UpdateTaskState extends State<UpdateTask> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Modifier'),
+          title: Text(AppLocalizations.of(context)!.modifier),
           backgroundColor: app.appearance(light, themes).primaryColor,
           titleTextStyle: TextStyle(
             letterSpacing: 5,
@@ -65,7 +69,7 @@ class _UpdateTaskState extends State<UpdateTask> {
                 cursorColor: app.appearance(light, themes).secondlyColor,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  labelText: 'Titre...',
+                  labelText: AppLocalizations.of(context)!.titre,
                   labelStyle: TextStyle(
                       color: app.appearance(light, themes).secondlyColor,
                       fontSize: 30),
@@ -88,7 +92,7 @@ class _UpdateTaskState extends State<UpdateTask> {
                   maxLines: null,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Description...',
+                      labelText: AppLocalizations.of(context)!.descritpion,
                       labelStyle: TextStyle(
                         color: app.appearance(light, themes).secondlyColor,
                         fontSize: 18,
@@ -114,18 +118,21 @@ class _UpdateTaskState extends State<UpdateTask> {
                       child: TextButton(
                         onPressed: () {
                           _formkey.currentState?.save();
-                          tachesCopy[id].title = titleController.text;
-                          tachesCopy[id].description =
-                              descriptionController.text;
+                          
                           setState(() {
                             ok = ok1 = ok2 = false;
-                            titleController.text = '';
-                            descriptionController.text = '';
+                            final database = DatabaseHelper.instance;
+                            database.updateTask(Task(
+                                id: tasksCopy[id].id,
+                                title: titleController.text,
+                                description: descriptionController.text,
+                                createdAt: DateFormat('MMM d HH:mm')
+                                    .format(DateTime.now())));
                           });
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (builder) => Home()));
                         },
-                        child: Text('Enregistrer',
+                        child: Text(AppLocalizations.of(context)!.enregistrer,
                             style: TextStyle(
                               color: Colors.white,
                             )),

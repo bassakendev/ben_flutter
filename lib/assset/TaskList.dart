@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import '../appAppearance/AppAppearance.dart';
 import '../controller/tasksController/TasksController.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../dataBase/DataBaseAction.dart';
 import '../dataBase/Task.dart';
 
 class TaskList extends StatefulWidget {
@@ -25,7 +28,7 @@ class _TaskListState extends State<TaskList> {
 
   @override
   Widget build(BuildContext context) {
-    tasksCopy.sort((a, b) => b.getId().compareTo(a.getId()));
+    tasksCopy.sort((a, b) => b.getId()!.compareTo(a.getId()!));
     return Expanded(
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -71,7 +74,7 @@ class _TaskListState extends State<TaskList> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(height: 4),
                       Text(
                         task.description,
                         overflow: TextOverflow.ellipsis,
@@ -81,7 +84,7 @@ class _TaskListState extends State<TaskList> {
                           letterSpacing: 1,
                         ),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(height: 2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -96,7 +99,7 @@ class _TaskListState extends State<TaskList> {
                                     color: app
                                         .appearance(light, themes)
                                         .secondlyColor)
-                                : Text('En attente...',
+                                : Text(AppLocalizations.of(context)!.enAttente,
                                     style: TextStyle(
                                         color:
                                             Color.fromARGB(255, 6, 59, 102))),
@@ -104,8 +107,8 @@ class _TaskListState extends State<TaskList> {
                           TextButton(
                             onPressed: () {
                               setState(() {
-                                tasksCopy.removeWhere(
-                                    (element) => element.id == task.getId());
+                                final database = DatabaseHelper.instance;
+                                database.deleteTask(task.id!);
                               });
                             },
                             child: Icon(
@@ -137,7 +140,7 @@ class _TaskListState extends State<TaskList> {
                                             opperation: 'update',
                                             titre: task.title,
                                             description: task.description,
-                                            id: task.getId())));
+                                            id: tasksCopy.length - (1 + i))));
                               },
                               child: Icon(Icons.edit,
                                   color: light ? Colors.black : Colors.white))

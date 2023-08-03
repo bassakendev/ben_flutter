@@ -3,8 +3,8 @@
   "enAttente": "En attente...",
   "creer": "créer",
   "rechercher": "Rechercher",
-  "titre": "Titre",
-  "descritpion": "Description",
+  "titre": "Titre...",
+  "descritpion": "Description...",
   "modifier": "Modifier",
   "nouvelleTache": "Nouvelle Tache",
   "mode": "Mode",
@@ -55,6 +55,7 @@
   "fonction5": "- Choisir un Thème parmi plusieurs couleurs populaires, selon votre préference",
   "fonction6": "- Choisir la langue de préférence, parmi plusieurs couramment utilisées",
   "aurevoir":"Nous espérons que notre application vous aidera à rester organisé et productif !",
+  "enregistrer": "Enregistrer",
   "@desc": {
     "description": "language de base"
   }

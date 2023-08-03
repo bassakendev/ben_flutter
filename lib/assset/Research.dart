@@ -1,10 +1,13 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, file_names, unused_local_variable, library_private_types_in_public_api, must_be_immutable, prefer_const_constructors_in_immutables
 
 import '../appAppearance/AppAppearance.dart';
-import '../dataBase/dataBaseAction.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'TaskList.dart';
 import 'package:flutter/material.dart';
 import '../dataBase/Task.dart';
+import '../dataBase/DataBaseAction.dart';
+
 
 class Research extends StatefulWidget {
   @override
@@ -12,10 +15,6 @@ class Research extends StatefulWidget {
 }
 
 class _ResearchState extends State<Research> {
-  List<Task> tachesCopy = [];
-
-  AppAppearance app = AppAppearance();
-
   @override
   void initState() {
     super.initState();
@@ -27,9 +26,12 @@ class _ResearchState extends State<Research> {
     final loadedTasks = await database.getTasks();
 
     setState(() {
-      tachesCopy = loadedTasks;
+      tasks = loadedTasks;
     });
   }
+  List<Task> tasksCopy = tasks;
+
+  AppAppearance app = AppAppearance();
 
   @override
   Widget build(BuildContext context) {
@@ -52,32 +54,32 @@ class _ResearchState extends State<Research> {
                       borderSide: BorderSide(
                           color: app.appearance(light, themes).secondlyColor),
                     ),
-                    labelText: 'Rechercher...',
+                    labelText: AppLocalizations.of(context)!.rechercher,
                     labelStyle: TextStyle(
                       color: app.appearance(light, themes).secondlyColor,
                     )),
                 onChanged: (value) {
-                  for (int i = 0; i < tachesCopy.length; i++) {
-                    if (tachesCopy[i]
+                  for (int i = 0; i < tasksCopy.length; i++) {
+                    if (tasksCopy[i]
                             .title
                             .toLowerCase()
                             .contains(value.toLowerCase()) ||
-                        tachesCopy[i]
+                        tasksCopy[i]
                             .description
                             .toLowerCase()
                             .contains(value.toLowerCase())) {
                       setState(() {
-                        tachesCopy[i].setFind(true);
+                        tasksCopy[i].setFind(true);
                       });
                     } else {
                       setState(() {
-                        tachesCopy[i].setFind(false);
+                        tasksCopy[i].setFind(false);
                       });
                     }
                   }
                   if (value == '') {
-                    for (int i = 0; i < tachesCopy.length; i++) {
-                      tachesCopy[i].setFind(true);
+                    for (int i = 0; i < tasksCopy.length; i++) {
+                      tasksCopy[i].setFind(true);
                     }
                   }
                 },
@@ -86,7 +88,7 @@ class _ResearchState extends State<Research> {
           ],
         ),
       ),
-      TaskList(tasks: tachesCopy)
+      TaskList(tasks: tasksCopy)
     ]);
   }
 }

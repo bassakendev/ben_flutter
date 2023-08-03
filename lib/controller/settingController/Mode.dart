@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 
 import '../../appAppearance/AppAppearance.dart';
+import '../../dataBase/StoragesUtils.dart';
 import '../../dataBase/Task.dart';
 import '../../main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Mode extends StatefulWidget {
   @override
@@ -21,14 +23,14 @@ class _ModeState extends State<Mode> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: app.appearance(light, themes).primaryColor,
-        title: Text('Choisir un mode'),
+        title: Text(AppLocalizations.of(context)!.mode),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Choisissez un mode :',
+              AppLocalizations.of(context)!.choisissezUnMode,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 30),
@@ -42,7 +44,7 @@ class _ModeState extends State<Mode> {
             ),
             SizedBox(height: 30),
             Text(
-              'Mode sélectionné :',
+              AppLocalizations.of(context)!.modeSelectionne,
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
@@ -56,7 +58,9 @@ class _ModeState extends State<Mode> {
               ),
               child: Center(
                 child: Text(
-                  light ? 'Jour' : 'Nuit',
+                  light
+                      ? AppLocalizations.of(context)!.jour
+                      : AppLocalizations.of(context)!.nuit,
                   style: TextStyle(fontSize: 16),
                 ),
               ),
@@ -73,7 +77,7 @@ class _ModeState extends State<Mode> {
         if (tape != modeId) {
           setState(() {
             tape = modeId;
-            light = !light;
+            StoragesUtils.setMode(!light);
           });
           Navigator.push(
               context, MaterialPageRoute(builder: ((context) => MyApp())));
@@ -98,7 +102,9 @@ class _ModeState extends State<Mode> {
         ),
         child: Center(
           child: Text(
-            modeId == 0 ? 'Jour' : 'Nuit',
+            modeId == 0
+                ? AppLocalizations.of(context)!.jour
+                : AppLocalizations.of(context)!.nuit,
             style: TextStyle(fontSize: 16),
           ),
         ),

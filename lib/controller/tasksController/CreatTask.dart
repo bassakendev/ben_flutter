@@ -6,7 +6,9 @@ import 'package:intl/intl.dart';
 import 'dart:core';
 
 import '../../appAppearance/AppAppearance.dart';
+import '../../dataBase/DataBaseAction.dart';
 import '../../dataBase/Task.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreatTask extends StatefulWidget {
   @override
@@ -16,7 +18,6 @@ class CreatTask extends StatefulWidget {
 class _CreatTaskState extends State<CreatTask> {
   AppAppearance app = AppAppearance();
   final _formkey = GlobalKey<FormState>();
-  List<Task> tachesCopy = [];
   String title = '';
   String description = '';
   bool ok1 = false;
@@ -26,7 +27,7 @@ class _CreatTaskState extends State<CreatTask> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Nouvelle Tache'),
+          title: Text(AppLocalizations.of(context)!.nouvelleTache),
           backgroundColor: app.appearance(light, themes).primaryColor,
           titleTextStyle: TextStyle(
             letterSpacing: 5,
@@ -46,7 +47,7 @@ class _CreatTaskState extends State<CreatTask> {
                 cursorColor: app.appearance(light, themes).secondlyColor,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  labelText: 'Titre...',
+                  labelText: AppLocalizations.of(context)!.titre,
                   labelStyle: TextStyle(
                       color: app.appearance(light, themes).secondlyColor,
                       fontSize: 30),
@@ -69,7 +70,7 @@ class _CreatTaskState extends State<CreatTask> {
                   maxLines: null,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Description...',
+                      labelText: AppLocalizations.of(context)!.descritpion,
                       labelStyle: TextStyle(
                         color: app.appearance(light, themes).secondlyColor,
                         fontSize: 18,
@@ -96,10 +97,11 @@ class _CreatTaskState extends State<CreatTask> {
                       child: TextButton(
                         onPressed: () {
                           _formkey.currentState?.save();
-                          tachesCopy.add(Task(
-                              title,
-                              description,
-                              DateFormat('MMM d HH:mm')
+                          final database = DatabaseHelper.instance;
+                          database.insertTask(Task(
+                              title: title,
+                              description: description,
+                              createdAt: DateFormat('MMM d HH:mm')
                                   .format(DateTime.now())));
                           setState(() {
                             ok = ok1 = ok2 = false;
@@ -108,7 +110,7 @@ class _CreatTaskState extends State<CreatTask> {
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (builder) => Home()));
                         },
-                        child: Text('Enregistrer',
+                        child: Text(AppLocalizations.of(context)!.enregistrer,
                             style: TextStyle(
                               color: Colors.white,
                             )),

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../appAppearance/AppAppearance.dart';
 import '/dataBase/Task.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Apropos extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _AproposState extends State<Apropos> {
     return Scaffold(
       appBar: AppBar(
         title: Row(children: [
-          Text('À propos'),
+          Text(AppLocalizations.of(context)!.apropos),
         ]),
         backgroundColor: app.appearance(light, themes).primaryColor,
         titleTextStyle: TextStyle(
@@ -36,7 +37,7 @@ class _AproposState extends State<Apropos> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'À propos de l\'application',
+                  AppLocalizations.of(context)!.aproposDeLapp,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -44,21 +45,21 @@ class _AproposState extends State<Apropos> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Bienvenue dans notre application ToDoList !',
+                  AppLocalizations.of(context)!.bienvenue,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Cette application est une application moderne, qui vous permet de gérer facilement vos tâches quotidiennes. Vous pouvez ajouter, supprimer, modifier, voir et marquer vos tâches comme terminées.',
+                  AppLocalizations.of(context)!.detail,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Fonctionnalités principales :',
+                  AppLocalizations.of(context)!.fonctionnalitesPrincipales,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -66,49 +67,49 @@ class _AproposState extends State<Apropos> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  '- jouAter des tâches avec une description et une date de création',
+                  AppLocalizations.of(context)!.fonction1,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  '- Marquer les tâches comme terminées/En cours',
+                  AppLocalizations.of(context)!.fonction2,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  '- Supprimer les tâches',
+                  AppLocalizations.of(context)!.fonction3,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  '- Passer en mode Nuit ou Jour',
+                  AppLocalizations.of(context)!.fonction4,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  '- Choisir un Thème parmi plusieurs couleurs populaires, selon votre préference',
+                  AppLocalizations.of(context)!.fonction5,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  '- Choisir la langue de préférence, parmi plusieurs couramment utilisées',
+                  AppLocalizations.of(context)!.fonction6,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'À propos du développeur',
+                  AppLocalizations.of(context)!.aproposDuDeveloppeur,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -116,35 +117,35 @@ class _AproposState extends State<Apropos> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Nom : bassakendev',
+                  AppLocalizations.of(context)!.nom('Bassakendev'),
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Mail : bassakendev@gmail.com',
+                  AppLocalizations.of(context)!.mail('bassakendev@gmail.com'),
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Pays : Cameroun',
+                  AppLocalizations.of(context)!.pays,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Description : Developpeur Full-stack web et mobile',
+                  AppLocalizations.of(context)!.specialite,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(height: 30),
                 Text(
-                  'Nous espérons que notre application vous aidera à rester organisé et productif !',
+                  AppLocalizations.of(context)!.aurevoir,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ],

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../appAppearance/AppAppearance.dart';
 import '../../dataBase/Task.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Langues extends StatefulWidget {
   @override
@@ -12,22 +13,21 @@ class Langues extends StatefulWidget {
 
 class _LanguesState extends State<Langues> {
   AppAppearance app = AppAppearance();
-
-  String selectedLanguage = 'Français';
+  String selectedLanguage = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: app.appearance(light, themes).primaryColor,
-        title: Text('Choisir une langue'),
+        title: Text(AppLocalizations.of(context)!.langue),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Choisissez une langue :',
+              AppLocalizations.of(context)!.choisissezUneLangue,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 30),
@@ -35,19 +35,19 @@ class _LanguesState extends State<Langues> {
               spacing: 20,
               runSpacing: 20,
               children: [
-                languageButton('Français', 'fr'),
-                languageButton('Anglais', 'en'),
-                languageButton('Espagnol', 'es'),
-                languageButton('Allemand', 'de'),
-                languageButton('Portugais', 'pt'),
-                languageButton('Italien', 'it'),
-                languageButton('Arabe', 'ar'),
-                languageButton('Russe', 'ru'),
+                languageButton(AppLocalizations.of(context)!.francais, 'fr'),
+                languageButton(AppLocalizations.of(context)!.anglais, 'en'),
+                languageButton(AppLocalizations.of(context)!.espagnol, 'es'),
+                languageButton(AppLocalizations.of(context)!.allemand, 'de'),
+                languageButton(AppLocalizations.of(context)!.portugais, 'pt'),
+                languageButton(AppLocalizations.of(context)!.italien, 'it'),
+                languageButton(AppLocalizations.of(context)!.arabe, 'ar'),
+                languageButton(AppLocalizations.of(context)!.russe, 'ru'),
               ],
             ),
             SizedBox(height: 30),
             Text(
-              'Langue sélectionnée :',
+              AppLocalizations.of(context)!.langueSelectionnee,
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
