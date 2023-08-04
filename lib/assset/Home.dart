@@ -3,13 +3,9 @@
 import 'package:flutter/services.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/intl.dart';
 
 import '../appAppearance/AppAppearance.dart';
-import '../dataBase/StoragesUtils.dart';
 import '../dataBase/Task.dart';
-import '../l10n/L10n.dart';
 import 'Settings.dart';
 import '../controller/tasksController/TasksController.dart';
 import 'Research.dart';
@@ -22,62 +18,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   AppAppearance app = AppAppearance();
   void changeIndexIconFooter(index) {
     setState(() {
       indexIconFooter = index;
     });
   }
-  
-  Locale _locale = Locale('en');
-  String lg = '';
-  @override
-  void initState() {
-    super.initState();
-    _loadUtils();
-    _loadTasks();
-  }
-
-  Future<void> _loadTasks() async {
-    final loadedTasks = await StoragesUtils.getTasks();
-
-    setState(() {
-      tasks = loadedTasks;
-    });
-  }
-
-  Future<void> _loadUtils() async {
-    final loadedMode = await StoragesUtils.getMode();
-    final loadedTheme = await StoragesUtils.getTheme();
-    final loadedLang = await StoragesUtils.getLang();
-
-    setState(() {
-      light = loadedMode;
-      themes = loadedTheme;
-      _locale = Locale(loadedLang);
-      lg = loadedLang;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    Intl.defaultLocale = lg;
-    return MaterialApp(
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        themeMode: light ? ThemeMode.light : ThemeMode.dark,
-        debugShowCheckedModeBanner: false,
-        title: 'Bassakendev',
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: L10n.all(),
-        locale: _locale,
-        home: WillPopScope(
+    return WillPopScope(
         onWillPop: () async {
           // Action à effectuer lorsque l'utilisateur appuie sur la touche physique de retour
           SystemNavigator.pop();
@@ -159,6 +108,6 @@ class _HomeState extends State<Home> {
                   icon: Icon(Icons.settings))
             ]),
           ),
-            ))));
+        )));
   }
 }

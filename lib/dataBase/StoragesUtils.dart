@@ -32,6 +32,7 @@ class StoragesUtils {
     final SharedPreferences prefs = await _prefs;
     await prefs.setBool(MODE_KEY, mode);
   }
+
   static Future<String> getLang() async {
     final SharedPreferences prefs = await _prefs;
     return prefs.getString(LANG_KEY) ?? 'en';
