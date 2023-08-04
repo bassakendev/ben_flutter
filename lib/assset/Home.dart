@@ -26,13 +26,7 @@ class _HomeState extends State<Home> {
   }
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async {
-          Navigator.pop(context);
-          return false;
-        },
-        child: Center(
-            child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Row(children: [
@@ -106,6 +100,6 @@ class _HomeState extends State<Home> {
                   icon: Icon(Icons.settings))
             ]),
           ),
-        )));
+    );
   }
 }

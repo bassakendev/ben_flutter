@@ -71,7 +71,17 @@ class _MyAppState extends State<MyApp> {
         ],
         supportedLocales: L10n.all(),
         locale: _locale,
-        home: FutureBuilder<void>(
+        home: WillPopScope(
+            onWillPop: () async {
+              Navigator.pop(context);
+              return false;
+            },
+            child: WillPopScope(
+                onWillPop: () async {
+                  Navigator.pop(context);
+                  return false;
+                },
+                child: FutureBuilder<void>(
             future: _loadResources(),
             builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -79,6 +89,6 @@ class _MyAppState extends State<MyApp> {
               } else {
                 return Home();
               }
-            }));
+                    }))));
   }
 }

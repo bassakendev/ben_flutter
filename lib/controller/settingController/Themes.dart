@@ -18,7 +18,12 @@ class _ThemesState extends State<Themes> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () async {
+          Navigator.pop(context);
+          return false;
+        },
+        child: Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: app.appearance(light, themes).primaryColor,
@@ -75,7 +80,7 @@ class _ThemesState extends State<Themes> {
           ],
         ),
       ),
-    );
+        ));
   }
 
   Widget colorButton(int id, String colorName, Color color) {

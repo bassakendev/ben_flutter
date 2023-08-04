@@ -29,7 +29,12 @@ class _LanguesState extends State<Langues> {
   @override
   Widget build(BuildContext context) {
     getFastLang();
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () async {
+          Navigator.pop(context);
+          return false;
+        },
+        child: Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: app.appearance(light, themes).primaryColor,
@@ -82,7 +87,7 @@ class _LanguesState extends State<Langues> {
           ],
         ),
       ),
-    );
+        ));
   }
 
   Widget languageButton(String languageName, String languageCode) {
