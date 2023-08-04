@@ -38,7 +38,7 @@ class AppAppearance {
   late Color secondlyLightPinck = Colors.pink;
   late Color secondlyDarkPinck = const Color.fromARGB(255, 99, 18, 45);
   late Color tertiaryLightPink = const Color.fromARGB(255, 228, 204, 218);
-  late Color tertiaryDarkPink = const Color.fromARGB(255, 143, 31, 68);
+  late Color tertiaryDarkPink = const Color.fromARGB(255, 133, 28, 63);
 
   late Color primaryLightBlue = const Color.fromARGB(255, 57, 153, 231);
   late Color primaryDarkBlue = const Color.fromARGB(255, 32, 77, 114);
