@@ -7,17 +7,49 @@ import 'package:intl/intl.dart';
 import 'assset/loading.dart';
 import 'package:flutter/material.dart';
 import 'assset/Home.dart';
+import 'dataBase/StoragesUtils.dart';
 import 'dataBase/Task.dart';
 import 'l10n/L10n.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   Future<void> _loadResources() async {
     // Simulate loading resources
     await Future.delayed(Duration(seconds: 8));
   }
+  String lg = '';
+  @override
+  void initState() {
+    super.initState();
+    _loadUtils();
+    _loadTasks();
+  }
 
+  Future<void> _loadUtils() async {
+    final loadedMode = await StoragesUtils.getMode();
+    final loadedTheme = await StoragesUtils.getTheme();
+    final loadedLang = await StoragesUtils.getLang();
+
+    setState(() {
+      light = loadedMode;
+      themes = loadedTheme;
+      lang = loadedLang;
+    });
+  }
+
+  Future<void> _loadTasks() async {
+    final loadedTasks = await StoragesUtils.getTasks();
+
+    setState(() {
+      tasks = loadedTasks;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     Intl.defaultLocale = lang;
@@ -36,13 +68,13 @@ class MyApp extends StatelessWidget {
         supportedLocales: L10n.all(),
         locale: Locale(lang),
         home: FutureBuilder<void>(
-                future: _loadResources(),
-                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Loading();
-                  } else {
-                    return Home();
-                  }
-                }));
+            future: _loadResources(),
+            builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Loading();
+              } else {
+                return Home();
+              }
+            }));
   }
 }

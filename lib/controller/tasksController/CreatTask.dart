@@ -41,12 +41,13 @@ class _CreatTaskState extends State<CreatTask> {
         ),
         body: Form(
           key: _formkey,
-          child: Column(children: [
+          child: ListView(children: [
             Padding(
               padding: EdgeInsets.all(15.0),
               child: TextField(
                 style: TextStyle(fontSize: 22.0),
                 maxLines: null,
+                maxLength: 150,
                 cursorColor: app.appearance(light, themes).secondlyColor,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -71,6 +72,7 @@ class _CreatTaskState extends State<CreatTask> {
                   style: TextStyle(fontSize: 22.0),
                   cursorColor: app.appearance(light, themes).secondlyColor,
                   maxLines: null,
+                  maxLength: 3870,
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       labelText: AppLocalizations.of(context)!.descritpion,

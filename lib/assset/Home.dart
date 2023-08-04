@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../dataBase/StoragesUtils.dart';
 import '../dataBase/Task.dart';
 import '../l10n/L10n.dart';
 import 'package:flutter/material.dart';
@@ -19,33 +18,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
  
-  String lg = '';
-  @override
-  void initState() {
-    super.initState();
-    _loadUtils();
-    _loadTasks();
-  }
-
-  Future<void> _loadUtils() async {
-    final loadedMode = await StoragesUtils.getMode();
-    final loadedTheme = await StoragesUtils.getTheme();
-    final loadedLang = await StoragesUtils.getLang();
-
-    setState(() {
-      light = loadedMode;
-      themes = loadedTheme;
-      lang = loadedLang;
-    });
-  }
-
-  Future<void> _loadTasks() async {
-    final loadedTasks = await StoragesUtils.getTasks();
-
-    setState(() {
-      tasks = loadedTasks;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     Intl.defaultLocale = lang;

@@ -53,7 +53,7 @@ class _TaskListState extends State<TaskList> {
                     .toList()[i];
             return Container(
               margin: EdgeInsets.all(10),
-              height: 135,
+              height: 140,
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: app.appearance(light, themes).tertiaryColor,

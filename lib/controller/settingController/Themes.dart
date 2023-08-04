@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors, file_names, use_key_in_widget_constructors, library_private_types_in_public_api
 
-import 'package:Dumpi/assset/Home.dart';
 import 'package:Dumpi/dataBase/StoragesUtils.dart';
 import 'package:flutter/material.dart';
 
 import '../../appAppearance/AppAppearance.dart';
 import '../../dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../main.dart';
 
 class Themes extends StatefulWidget {
   @override
@@ -92,7 +93,7 @@ class _ThemesState extends State<Themes> {
 
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: ((context) => Home())),
+            MaterialPageRoute(builder: ((context) => MyApp())),
             ((route) => false));
       },
       child: Container(

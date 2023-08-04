@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors
 
-import 'package:Dumpi/assset/Home.dart';
+import 'package:Dumpi/main.dart';
 import 'package:flutter/material.dart';
 
 import '../../appAppearance/AppAppearance.dart';
@@ -82,7 +82,7 @@ class _ModeState extends State<Mode> {
           });
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: ((context) => Home())),
+              MaterialPageRoute(builder: ((context) => MyApp())),
               ((route) => false));
         }
       },

@@ -31,15 +31,15 @@ class _TaskState extends State<ShowTask> {
           fontWeight: FontWeight.w900,
         ),
       ),
-      body: Container(
-        child: Padding(
+      body: ListView(children: [
+        Padding(
           padding: EdgeInsets.all(15.0),
           child: Text(description,
               style: TextStyle(
                 fontSize: 18,
               )),
         ),
-      ),
+      ]),
     );
   }
 }
