@@ -66,6 +66,8 @@ class _TaskListState extends State<TaskList> {
                     children: [
                       Text(
                         task.title,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,  
                         style: TextStyle(
                           color: app.appearance(light, themes).secondlyColor,
                           fontSize: 20,
@@ -139,9 +141,9 @@ class _TaskListState extends State<TaskList> {
                                     MaterialPageRoute(
                                         builder: (builder) => TasksController(
                                             opperation: 'show',
-                                            titre: task.title,
+                                            title: task.title,
                                             description: task.description,
-                                            id: 0)));
+                                            time: '')));
                               },
                               child: Icon(
                                 Icons.remove_red_eye_rounded,
@@ -154,9 +156,10 @@ class _TaskListState extends State<TaskList> {
                                     MaterialPageRoute(
                                         builder: (builder) => TasksController(
                                             opperation: 'update',
-                                            titre: task.title,
+                                              title: task.title,
                                             description: task.description,
-                                            id: i)));
+                                              time: task.createdAt,
+                                            )));
                               },
                               child: Icon(Icons.edit,
                                   color: light ? Colors.black : Colors.white))

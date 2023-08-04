@@ -10,8 +10,11 @@ import '../../dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdateTask extends StatefulWidget {
-  int id;
-  UpdateTask({required this.id});
+  String title;
+  String description;
+  String time;
+  UpdateTask(
+      {required this.title, required this.description, required this.time});
   @override
   _UpdateTaskState createState() => _UpdateTaskState();
 }
@@ -31,10 +34,16 @@ class _UpdateTaskState extends State<UpdateTask> {
   @override
   void initState() {
     super.initState();
-    id = widget.id;
-    titleController = TextEditingController(text: tasksCopy[id].title);
-    descriptionController =
-        TextEditingController(text: tasksCopy[id].description);
+    for (int i = 0; i < tasksCopy.length; i++) {
+      if (tasksCopy[i].title == widget.title &&
+          tasksCopy[i].description == widget.description &&
+          tasksCopy[i].createdAt == widget.time) {
+        titleController = TextEditingController(text: tasksCopy[i].title);
+        descriptionController =
+            TextEditingController(text: tasksCopy[i].description);
+        break;
+      }
+    }
   }
 
   @override
@@ -124,12 +133,22 @@ class _UpdateTaskState extends State<UpdateTask> {
                             ok = ok1 = ok2 = false;
                             Future<void> fast() async {
                               String lang = await StoragesUtils.getLang();
-                              tasksCopy[id].title = titleController.text;
-                              tasksCopy[id].description =
-                                  descriptionController.text;
-                              tasksCopy[id].createdAt =
-                                  DateFormat('MMM d HH:mm', lang)
-                                      .format(DateTime.now());
+
+                              for (int i = 0; i < tasksCopy.length; i++) {
+                                if (tasksCopy[i].title == widget.title &&
+                                    tasksCopy[i].description ==
+                                        widget.description &&
+                                    tasksCopy[i].createdAt == widget.time) {
+                                  tasksCopy[i].title = titleController.text;
+                                  tasksCopy[i].description =
+                                      descriptionController.text;
+                                  tasksCopy[i].createdAt =
+                                      DateFormat('MMM d HH:mm', lang)
+                                          .format(DateTime.now());
+                                  break;
+                                }
+                              }
+
                               await StoragesUtils.saveTasks(tasksCopy);
                               tasks = await StoragesUtils.getTasks();
                             }

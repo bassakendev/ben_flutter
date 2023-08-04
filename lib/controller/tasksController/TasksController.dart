@@ -8,14 +8,14 @@ import 'UpdateTask.dart';
 
 class TasksController extends StatefulWidget {
   final String opperation;
-  late String titre;
+  late String title;
   late String description;
-  late int id;
+  late String time;
   TasksController(
       {required this.opperation,
-      required this.titre,
+      required this.title,
       required this.description,
-      required this.id});
+      required this.time});
   @override
   _TasksControllerState createState() => _TasksControllerState();
 }
@@ -24,24 +24,23 @@ class _TasksControllerState extends State<TasksController> {
   @override
   Widget build(BuildContext context) {
     String opperation = widget.opperation;
-    String titre = widget.titre;
+    String title = widget.title;
     String description = widget.description;
-    int id = widget.id;
+    String time = widget.time;
 
-    return WillPopScope(
-        onWillPop: () async {
-          Navigator.pop(context);
-          return false;
-        },
-        child: opperation == 'create'
+    return opperation == 'create'
             ? CreatTask()
             : opperation == 'show'
                 ? ShowTask(
-                    title: titre,
+                title: title,
                     description: description,
                   )
                 : opperation == 'update'
-                    ? UpdateTask(id: id)
-                    : const MaterialApp());
+                ? UpdateTask(
+                    title: title,
+                    description: description,
+                    time: time,
+                  )
+                : const MaterialApp();
   }
 }
