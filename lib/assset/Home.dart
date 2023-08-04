@@ -28,9 +28,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          // Action à effectuer lorsque l'utilisateur appuie sur la touche physique de retour
-          SystemNavigator.pop();
-          // Retourne false pour empêcher la fermeture de l'application
+          Navigator.pop(context);
           return false;
         },
         child: Center(

@@ -46,7 +46,7 @@
     "aproposDeLapp": "Acerca de la aplicación",
     "fonctionnalitesPrincipales": "Funciones principales",
     "aproposDuDeveloppeur": "Acerca del desarrollador",
-    "bienvenue": "¡Bienvenido a nuestra aplicación ToDoList!",
+    "bienvenue": "¡Bienvenido a nuestra aplicación {appName}!",
     "detail": "Esta aplicación es una aplicación moderna que te permite gestionar fácilmente tus tareas diarias. Puedes agregar, eliminar, editar, ver y marcar tus tareas como completadas.",
     "fonction1": "- Agregar tareas con descripción y fecha de creación",
     "fonction2": "- Marcar tareas como completadas/en progreso",

@@ -46,7 +46,7 @@ class _AproposState extends State<Apropos> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.bienvenue,
+                  AppLocalizations.of(context)!.bienvenue('Dumpi'),
                   style: TextStyle(
                     fontSize: 16,
                   ),

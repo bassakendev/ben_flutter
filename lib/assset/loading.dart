@@ -22,7 +22,7 @@ class _LoadingState extends State<Loading> {
       Padding(
         padding: EdgeInsets.all(30),
         child: Text(
-          'Todo-List',
+          'Dumpi',
           style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.bold,

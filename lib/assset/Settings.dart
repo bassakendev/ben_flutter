@@ -12,7 +12,12 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () async {
+          Navigator.pop(context);
+          return false;
+        },
+        child: Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: app.appearance(light, themes).primaryColor,
@@ -68,6 +73,6 @@ class Settings extends StatelessWidget {
               })
         ],
       ),
-    );
+        ));
   }
 }

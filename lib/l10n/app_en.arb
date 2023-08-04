@@ -46,7 +46,7 @@
     "aproposDeLapp": "About the application",
     "fonctionnalitesPrincipales": "Main features",
     "aproposDuDeveloppeur": "About the developer",
-    "bienvenue": "Welcome to our ToDoList application!",
+    "bienvenue": "Welcome to our application {appName}!",
     "detail": "This application is a modern app that allows you to easily manage your daily tasks. You can add, delete, edit, view, and mark your tasks as completed.",
     "fonction1": "- Add tasks with a description and creation date",
     "fonction2": "- Mark tasks as completed/In progress",
