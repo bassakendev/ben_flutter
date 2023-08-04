@@ -37,6 +37,7 @@ class _ResearchState extends State<Research> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Column(children: [
       SizedBox(
         height: 70,

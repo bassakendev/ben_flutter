@@ -28,17 +28,20 @@ class _TasksControllerState extends State<TasksController> {
     String description = widget.description;
     int id = widget.id;
 
-    if (opperation == 'create') {
-      return CreatTask();
-    } else if (opperation == 'show') {
-      return ShowTask(
-        title: titre,
-        description: description,
-      );
-    } else if (opperation == 'update') {
-      return UpdateTask(id: id);
-    } else {
-      return const MaterialApp();
-    }
+    return WillPopScope(
+        onWillPop: () async {
+          Navigator.pop(context);
+          return false;
+        },
+        child: opperation == 'create'
+            ? CreatTask()
+            : opperation == 'show'
+                ? ShowTask(
+                    title: titre,
+                    description: description,
+                  )
+                : opperation == 'update'
+                    ? UpdateTask(id: id)
+                    : const MaterialApp());
   }
 }

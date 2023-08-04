@@ -4,10 +4,10 @@ import 'package:Dumpi/dataBase/StoragesUtils.dart';
 import 'package:flutter/material.dart';
 
 import '../../appAppearance/AppAppearance.dart';
+import '../../assset/Home.dart';
 import '../../dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../main.dart';
 
 class Langues extends StatefulWidget {
   @override
@@ -101,8 +101,10 @@ class _LanguesState extends State<Langues> {
 
           fast();
         });
-        Navigator.push(
-            context, MaterialPageRoute(builder: ((context) => MyApp())));
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: ((context) => Home())),
+            ((route) => false));
       },
       child: Container(
         width: 100,

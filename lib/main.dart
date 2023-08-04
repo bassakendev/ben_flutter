@@ -13,50 +13,15 @@ import 'l10n/L10n.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   Future<void> _loadResources() async {
     // Simulate loading resources
     await Future.delayed(Duration(seconds: 8));
   }
 
-  Locale _locale = Locale('en');
-  String lg = '';
-  @override
-  void initState() {
-    super.initState();
-    _loadUtils();
-    _loadTasks();
-  }
-
-  Future<void> _loadUtils() async {
-    final loadedMode = await StoragesUtils.getMode();
-    final loadedTheme = await StoragesUtils.getTheme();
-    final loadedLang = await StoragesUtils.getLang();
-
-    setState(() {
-      light = loadedMode;
-      themes = loadedTheme;
-      _locale = Locale(loadedLang);
-      lg = loadedLang;
-    });
-  }
-
-  Future<void> _loadTasks() async {
-    final loadedTasks = await StoragesUtils.getTasks();
-
-    setState(() {
-      tasks = loadedTasks;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    Intl.defaultLocale = lg;
+    Intl.defaultLocale = lang;
     return MaterialApp(
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
@@ -70,25 +35,15 @@ class _MyAppState extends State<MyApp> {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: L10n.all(),
-        locale: _locale,
-        home: WillPopScope(
-            onWillPop: () async {
-              Navigator.pop(context);
-              return false;
-            },
-            child: WillPopScope(
-                onWillPop: () async {
-                  Navigator.pop(context);
-                  return false;
-                },
-                child: FutureBuilder<void>(
-            future: _loadResources(),
-            builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Loading();
-              } else {
-                return Home();
-              }
-                    }))));
+        locale: Locale(lang),
+        home: FutureBuilder<void>(
+                future: _loadResources(),
+                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Loading();
+                  } else {
+                    return Home();
+                  }
+                }));
   }
 }

@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors
 
+import 'package:Dumpi/assset/Home.dart';
 import 'package:flutter/material.dart';
 
 import '../../appAppearance/AppAppearance.dart';
 import '../../dataBase/StoragesUtils.dart';
 import '../../dataBase/Task.dart';
-import '../../main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Mode extends StatefulWidget {
@@ -80,8 +80,10 @@ class _ModeState extends State<Mode> {
             tape = modeId;
             StoragesUtils.setMode(!light);
           });
-          Navigator.push(
-              context, MaterialPageRoute(builder: ((context) => MyApp())));
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: ((context) => Home())),
+              ((route) => false));
         }
       },
       child: Container(

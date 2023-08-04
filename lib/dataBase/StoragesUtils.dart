@@ -15,7 +15,7 @@ class StoragesUtils {
 
   static Future<int> getTheme() async {
     final SharedPreferences prefs = await _prefs;
-    return prefs.getInt(THEME_KEY) ?? 0;
+    return prefs.getInt(THEME_KEY) ?? 7;
   }
 
   static Future<void> setTheme(int theme) async {

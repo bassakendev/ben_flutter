@@ -12,10 +12,9 @@ class Task {
   String statut;
   bool find = true;
 
-  Task(
-      {
+  Task({
     required this.title,
-      required this.description,
+    required this.description,
     required this.createdAt,
     required this.statut,
   }) {
@@ -73,4 +72,5 @@ List<Task> tasks = [];
 
 int indexIconFooter = 0;
 bool light = true;
-int themes = 0;
+int themes = 7;
+String lang = 'en';
