@@ -1,12 +1,15 @@
-// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, file_names
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, file_names, prefer_const_literals_to_create_immutables
 
 import 'package:ben_flutter/dataBase/StoragesUtils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 
 import '../../appAppearance/AppAppearance.dart';
 import '../../dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../l10n/L10n.dart';
 import '../../main.dart';
 
 class Langues extends StatefulWidget {
@@ -18,71 +21,113 @@ class _LanguesState extends State<Langues> {
   AppAppearance app = AppAppearance();
 
   String selectedLanguage = '';
-  void getFastLang() async {
+
+  Locale _locale = Locale('en');
+  String lg = '';
+  @override
+  void initState() {
+    super.initState();
+    _loadUtils();
+    _loadTasks();
+  }
+
+  Future<void> _loadTasks() async {
+    final loadedTasks = await StoragesUtils.getTasks();
+
+    setState(() {
+      tasks = loadedTasks;
+    });
+  }
+
+  Future<void> _loadUtils() async {
+    final loadedMode = await StoragesUtils.getMode();
+    final loadedTheme = await StoragesUtils.getTheme();
     final loadedLang = await StoragesUtils.getLang();
 
     setState(() {
+      light = loadedMode;
+      themes = loadedTheme;
+      _locale = Locale(loadedLang);
+      lg = loadedLang;
       selectedLanguage = loadedLang;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    getFastLang();
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: app.appearance(light, themes).primaryColor,
-        title: Text(AppLocalizations.of(context)!.langue),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.choisissezUneLangue,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 30),
-            Wrap(
-              spacing: 20,
-              runSpacing: 20,
+    Intl.defaultLocale = lg;
+    return MaterialApp(
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: light ? ThemeMode.light : ThemeMode.dark,
+        debugShowCheckedModeBanner: false,
+        title: 'Bassakendev',
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: L10n.all(),
+        locale: _locale,
+        home: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: app.appearance(light, themes).primaryColor,
+            title: Text(AppLocalizations.of(context)!.langue),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                languageButton(AppLocalizations.of(context)!.francais, 'fr'),
-                languageButton(AppLocalizations.of(context)!.anglais, 'en'),
-                languageButton(AppLocalizations.of(context)!.espagnol, 'es'),
-                languageButton(AppLocalizations.of(context)!.allemand, 'de'),
-                languageButton(AppLocalizations.of(context)!.portugais, 'pt'),
-                languageButton(AppLocalizations.of(context)!.italien, 'it'),
-                languageButton(AppLocalizations.of(context)!.arabe, 'ar'),
-                languageButton(AppLocalizations.of(context)!.russe, 'ru'),
+                Text(
+                  AppLocalizations.of(context)!.choisissezUneLangue,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 30),
+                Wrap(
+                  spacing: 20,
+                  runSpacing: 20,
+                  children: [
+                    languageButton(
+                        AppLocalizations.of(context)!.francais, 'fr'),
+                    languageButton(AppLocalizations.of(context)!.anglais, 'en'),
+                    languageButton(
+                        AppLocalizations.of(context)!.espagnol, 'es'),
+                    languageButton(
+                        AppLocalizations.of(context)!.allemand, 'de'),
+                    languageButton(
+                        AppLocalizations.of(context)!.portugais, 'pt'),
+                    languageButton(AppLocalizations.of(context)!.italien, 'it'),
+                    languageButton(AppLocalizations.of(context)!.arabe, 'ar'),
+                    languageButton(AppLocalizations.of(context)!.russe, 'ru'),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Text(
+                  AppLocalizations.of(context)!.langueSelectionnee,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: 200,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: app.appearance(light, themes).secondlyColor,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: Center(
+                    child: Text(
+                      getLangName(selectedLanguage, context),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+                ),
               ],
             ),
-            SizedBox(height: 30),
-            Text(
-              AppLocalizations.of(context)!.langueSelectionnee,
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 10),
-            Container(
-              width: 200,
-              height: 50,
-              decoration: BoxDecoration(
-                color: app.appearance(light, themes).secondlyColor,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: Center(
-                child: Text(
-                  getLangName(selectedLanguage, context),
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 
   Widget languageButton(String languageName, String languageCode) {

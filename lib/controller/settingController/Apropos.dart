@@ -1,7 +1,11 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 import '../../appAppearance/AppAppearance.dart';
+import '../../dataBase/StoragesUtils.dart';
+import '../../l10n/L10n.dart';
 import '/dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -12,10 +16,54 @@ class Apropos extends StatefulWidget {
 
 class _AproposState extends State<Apropos> {
   AppAppearance app = AppAppearance();
+  Locale _locale = Locale('en');
+  String lg = '';
+  @override
+  void initState() {
+    super.initState();
+    _loadUtils();
+    _loadTasks();
+  }
+
+  Future<void> _loadTasks() async {
+    final loadedTasks = await StoragesUtils.getTasks();
+
+    setState(() {
+      tasks = loadedTasks;
+    });
+  }
+
+  Future<void> _loadUtils() async {
+    final loadedMode = await StoragesUtils.getMode();
+    final loadedTheme = await StoragesUtils.getTheme();
+    final loadedLang = await StoragesUtils.getLang();
+
+    setState(() {
+      light = loadedMode;
+      themes = loadedTheme;
+      _locale = Locale(loadedLang);
+      lg = loadedLang;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    Intl.defaultLocale = lg;
+    return MaterialApp(
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: light ? ThemeMode.light : ThemeMode.dark,
+        debugShowCheckedModeBanner: false,
+        title: 'Bassakendev',
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: L10n.all(),
+        locale: _locale,
+        home: Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Row(children: [
@@ -154,6 +202,6 @@ class _AproposState extends State<Apropos> {
           ),
         ),
       ),
-    );
+        ));
   }
 }

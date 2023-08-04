@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, must_be_immutable, file_names, library_private_types_in_public_api, unused_local_variable
 
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 
 import '../../../assset/Home.dart';
@@ -8,6 +9,8 @@ import '../../appAppearance/AppAppearance.dart';
 import '../../dataBase/StoragesUtils.dart';
 import '../../dataBase/Task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../l10n/L10n.dart';
 
 class UpdateTask extends StatefulWidget {
   int id;
@@ -35,6 +38,8 @@ class _UpdateTaskState extends State<UpdateTask> {
     titleController = TextEditingController(text: tasksCopy[id].title);
     descriptionController =
         TextEditingController(text: tasksCopy[id].description);
+    _loadUtils();
+    _loadTasks();
   }
 
   @override
@@ -43,10 +48,48 @@ class _UpdateTaskState extends State<UpdateTask> {
     descriptionController.dispose();
     super.dispose();
   }
+  Locale _locale = Locale('en');
+  String lg = '';
+
+  Future<void> _loadTasks() async {
+    final loadedTasks = await StoragesUtils.getTasks();
+
+    setState(() {
+      tasks = loadedTasks;
+    });
+  }
+
+  Future<void> _loadUtils() async {
+    final loadedMode = await StoragesUtils.getMode();
+    final loadedTheme = await StoragesUtils.getTheme();
+    final loadedLang = await StoragesUtils.getLang();
+
+    setState(() {
+      light = loadedMode;
+      themes = loadedTheme;
+      _locale = Locale(loadedLang);
+      lg = loadedLang;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    Intl.defaultLocale = lg;
+    return MaterialApp(
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: light ? ThemeMode.light : ThemeMode.dark,
+        debugShowCheckedModeBanner: false,
+        title: 'Bassakendev',
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: L10n.all(),
+        locale: _locale,
+        home: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(AppLocalizations.of(context)!.modifier),
@@ -152,6 +195,6 @@ class _UpdateTaskState extends State<UpdateTask> {
               ),
             ),
           ]),
-        ));
+            )));
   }
 }

@@ -4,7 +4,6 @@ import 'package:ben_flutter/dataBase/StoragesUtils.dart';
 import 'package:flutter/material.dart';
 import '../appAppearance/AppAppearance.dart';
 import '../controller/tasksController/TasksController.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../dataBase/Task.dart';
 
@@ -54,7 +53,7 @@ class _TaskListState extends State<TaskList> {
                     .toList()[i];
             return Container(
               margin: EdgeInsets.all(10),
-              height: 130,
+              height: 135,
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: app.appearance(light, themes).tertiaryColor,
@@ -73,7 +72,7 @@ class _TaskListState extends State<TaskList> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      SizedBox(height: 3),
                       Text(
                         task.description,
                         overflow: TextOverflow.ellipsis,
@@ -83,7 +82,6 @@ class _TaskListState extends State<TaskList> {
                           letterSpacing: 1,
                         ),
                       ),
-                      SizedBox(height: 2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -111,10 +109,10 @@ class _TaskListState extends State<TaskList> {
                                     color: app
                                         .appearance(light, themes)
                                         .secondlyColor)
-                                : Text(AppLocalizations.of(context)!.enAttente,
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 6, 59, 102))),
+                                : Icon(Icons.timelapse,
+                                    color: app
+                                        .appearance(light, themes)
+                                        .secondlyColor),
                           ),
                           TextButton(
                             onPressed: () {
